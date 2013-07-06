@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DedalusWeb sample: Cloak of darkness</title>
+
+    <script src="http://olado.github.io/doT/doT.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+    <script src="../src/dedalus.js"></script>
+    <script src="../src/dedalus-web.js"></script>
+
+    <link rel="stylesheet" href="dedalus-web.css">
+
+ </head>
+<body>
+    <div id="story">
+
+        <initscript>
+            story.messageDamage  = 0;
+            story.messageScrewed = function () { return story.messageDamage < 2; };
+            story.cloakPutOn     = false;
+            story.cloakJustPutOn = false;
+        </initscript>
+
+        <!-- Novel -->
+        <title>The cloak of darkness</title>
+
+        <!-- Objects -->
+        <obj id="cloak" inventoryName="Cloak">
+            <action id="Examine">
+                {{? story.currentPageIs('bar') && !story.cloakPutOn}}
+                    {{ story.showParagraph('darkWarning'); }}
+                {{??}}
+                    A handsome cloak, of velvet trimmed with satin, and slightly spattered with raindrops. Its blackness is so deep that it almost seems to suck light from the room.
+                {{?}}
+            </action>
+
+            <action id="Get">
+                <when>!story.isInInventory('cloak')</when>
+                You take the cloak from the hung with you.
+                {{ story.putInInventory('cloak'); }}
+            </action>
+
+            <action id="Drop">
+                <when>story.isInInventory('cloak')</when>
+
+                {{? story.currentPageIs('bar') && !story.cloakPutOn }}
+                    {{ story.showParagraph('darkWarning'); }}
+                {{??}}
+                    This isn't the best place to leave a smart cloak lying around.
+                {{?}}
+            </action>
+
+            <action id="Put On">
+                <when>story.isInInventory('cloak')</when>
+                {{ story.cloakPutOn = true; }}
+                {{? story.currentPageIs('bar')}}
+                    {{story.cloakJustPutOn = true;}}
+                    {{story.turnTo('bar');}}
+                {{??}}
+                    You put on the cloak. It dresses fine on you!.
+                {{?}}
+            </action>
+        </obj>
+
+        <!-- Pages -->
+        <page id="intro">
+            <p>Hurrying through the rainswept November night, you're glad to see the bright lights of the Opera House. It's surprising that there aren't more people about but, hey, what do you expect in a cheap demo game...?</p>
+
+            <div class="center">Cloak of Darkness</div>
+            <div class="center">A basic IF demonstration.</div>
+        </page>
+
+        <page id="foyer" class="first">
+            <p>You are standing in a spacious hall, splendidly decorated in red and gold, with glittering chandeliers overhead. There is an entrance from the <show paragraph="street">street</show>, and there are doorways <turn to="bar">south</turn> and <turn to="cloakroom">west.</turn></p>
+
+            <paragraph id="street">
+                You've only just arrived, and besides, the weather outside seems to be getting worse.
+            </paragraph>
+        </page>
+
+        <page id="cloakroom">
+            The walls of this small room were clearly once lined with hooks, though now only <interact with="hook">one</interact> remains. The exit is a door to the <turn to="foyer">east</turn>.
+
+            <obj id="hook">
+                <action id="Examine">
+                    It's just a small brass hook {{? story.isInInventory('cloak')}}screwed to the wall{{??}}with a <interact with="cloak">cloak</interact> hanging on it{{?}}.
+                </action>
+            </obj>
+        </page>
+
+        <page id="bar">
+            {{? !story.cloakPutOn}}
+                <p>It's pitch black here. You can't see a thing. You can see a dim light to the <turn to="foyer">entrace</turn> of the bar</p>
+                <p>You can try moving around to the <show paragraph="movingInTheDark">northeast</show>, <show paragraph="movingInTheDark">east</show>, <show paragraph="movingInTheDark">southeast</show>, <show paragraph="movingInTheDark">south</show>, <show paragraph="movingInTheDark">southwest</show>, <show paragraph="movingInTheDark">west</show> or <show paragraph="movingInTheDark">northwest</show></p>
+            {{??}}
+                {{? story.cloakJustPutOn }}
+                    <p>The cloak seems to absorb the darkness and you can gradually see the room.</p>
+                    <p>You put on the cloak. It dresses fine on you!.</p>
+                    {{story.cloakJustPutOn = false;}}
+                {{?}}
+                The bar, much rougher than you'd have guessed after the opulence of the <turn to="foyer">foyer</turn>, is completely empty. There seems to be some sort of <interact with="message">message</interact> scrawled in the sawdust on the floor.
+            {{?}}
+
+            <obj id="message">
+                <action id="Read">
+                    {{? story.messageScrewed() }}
+                        The message, neatly marked in the sawdust, reads...
+                        <div class="center">*** You have won ***</div>
+                        {{story.endGame();}}
+                    {{??}}
+                        The message has been carelessly trampled, making it difficult to read. You can just distinguish the words...
+                        <div class="center">*** You have lost ***</div>
+                        {{story.endGame();}}
+                    {{?}}
+                </action>
+            </obj>
+
+            <paragraph id="movingInTheDark">
+                Blundering around in the dark isn't a good idea!
+                {{story.messageDamage += 2;}}
+            </paragraph>
+        </page>
+
+        <!-- Paragraphs -->
+        <paragraph id="darkWarning">
+            It is very dark here, you can't even see your hands.
+        </paragraph>
+
+    </div>
+
+    <div id="title"></div>
+    <div class="textSeparatorLarge">
+        <img src="http://www.gpotcenter.org/icer/divider.png" alt="">
+    </div>
+
+    <div id="inventoryHostWrapper">
+        <h2>Inventory</h2>
+        <div class="textSeparatorSmall">
+            <img src="http://roominate.com/blog/wp-content/uploads/2013/04/line_separator1.png" alt="">
+        </div>
+        <div id="inventoryHost" class="glow"></div>
+    </div>
+
+    <div id="host"></div>
+
+    <div id="interactionHost" class="glow"></div>
+
+    <div id="undoStageHost"></div>
+
+    <div id="footer">
+        <a id="undoHost" href="#">Undo</a>
+        <a id="saveHost" href="#">Save</a>
+        <a id="restoreHost" href="#">Restore</a>
+        <a id="reseteHost" href="#">Reset</a>
+    </div>
+
+    <script>
+        $(function () {
+            new DedalusWeb({
+                domSource         : $('#story'),
+                domTarget         : $('#host'),
+                titleTarget       : $('#title'),
+                inventoryTarget   : $('#inventoryHost'),
+                interactionTarget : $('#interactionHost'),
+                undoTarget        : $('#undoHost'),
+                undoStageTarget   : $('#undoStageHost'),
+                saveTarget        : $('#saveHost'),
+                restoreTarget     : $('#restoreHost'),
+                resetTarget       : $('#reseteHost'),
+            });
+        });
+
+    </script>
+</body>
+</html>
