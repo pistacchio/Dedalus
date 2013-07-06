@@ -2,7 +2,7 @@ body {
     font-family      : Georgia, Serif;
     font-size:       : 14px;
     color            : #3E3E3E;
-    background-image : url(http://subtlepatterns.com/patterns/redox_01.png);
+    background-image : url(background.png);
 }
 a {
     color: #3F3210;
@@ -22,10 +22,10 @@ p {
     box-shadow            : 0px 0px 5px 5px rgba(255, 255, 255, .75);
 }
 .textSeparatorLarge {
-    width         : 279px;
+    width         : 191px;
     margin-left   : auto;
     margin-right  : auto;
-    margin-bottom : 40px;
+    margin-bottom : 35px;
 }
 .textSeparatorSmall {
     width: 90px;
