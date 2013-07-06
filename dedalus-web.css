@@ -1,0 +1,109 @@
+body {
+    font-family      : Georgia, Serif;
+    font-size:       : 14px;
+    color            : #3E3E3E;
+    background-image : url(http://subtlepatterns.com/patterns/redox_01.png);
+}
+a {
+    color: #3F3210;
+}
+p {
+    margin-top    : 15px;
+    margin-bottom : 15px;
+}
+
+.glow {
+    background            : rgba(255, 255, 255, 0.9);
+    -webkit-border-radius : 10px;
+    -moz-border-radius    : 10px;
+    border-radius         : 10px;
+    -webkit-box-shadow    : 0px 0px 5px 5px rgba(255, 255, 255, .75);
+    -moz-box-shadow       : 0px 0px 5px 5px rgba(255, 255, 255, .75);
+    box-shadow            : 0px 0px 5px 5px rgba(255, 255, 255, .75);
+}
+.textSeparatorLarge {
+    width         : 279px;
+    margin-left   : auto;
+    margin-right  : auto;
+    margin-bottom : 40px;
+}
+.textSeparatorSmall {
+    width: 90px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.textSeparatorSmall img {
+    width: 90px;
+}
+.center {
+    text-align: center;
+}
+
+#story {
+    display: none;
+}
+
+#host {
+    width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#title {
+    font-size     : 20px;
+    font-weight   : bold;
+    color         : #3F3210;
+    margin-bottom : 10px;
+    width         : 500px;
+    margin-left   : auto;
+    margin-right  : auto;
+    text-align    : center;
+}
+
+#interactionHost {
+    position              : absolute;
+    overflow              : auto;
+    margin                : 0;
+    padding               : 5px;
+}
+#interactionHost ul,
+#inventoryHost ul {
+    display : block;
+    margin  : 0;
+    padding : 0;
+}
+#interactionHost li,
+#inventoryHost li {
+    float           : left;
+    margin          : 0;
+    padding         : 0;
+    margin-right    : 10px;
+    list-style-type : none;
+}
+
+#inventoryHost {
+    overflow: auto;
+}
+#inventoryHostWrapper {
+    width       : 150px;
+    float       : left;
+    margin-left : 50%;
+    left        : -450px;
+    position    : absolute;
+}
+#inventoryHostWrapper h2 {
+    font-size  : 18px;
+    width      : 150px;
+    text-align : center;
+    margin     : 0;
+}
+
+#footer {
+    bottom    : 10px;
+    font-size : 12px;
+    position  : fixed;
+    right     : 20px;
+}
+#undoStageHost {
+    display: none;
+}
