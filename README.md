@@ -165,7 +165,6 @@ Notice that you can use any regular HTML withing pages, paragraphs, actions and 
 It's time to add some action.
 
 ``` xml
-``` xml
 <page id="weaponRoom">
     Blasters, <show paragraph="notGoodIdea">laser guns</show>, <show paragraph="doctorScrewDriver">sonic screwdrivers</show>... Everything you ever want (but a lightsaber) is here for you.
 
