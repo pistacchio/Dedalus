@@ -1,0 +1,6 @@
+<snippet>
+    <content><![CDATA[story.currentPageIs($1)]]></content>
+    <tabTrigger>curr</tabTrigger>
+    <scope>text.html.basic.dedalus</scope>
+    <description>Dedalus </description>
+</snippet>

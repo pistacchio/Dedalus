@@ -1,0 +1,6 @@
+<snippet>
+    <content><![CDATA[story.removeFromInventory($1)]]></content>
+    <tabTrigger>rem</tabTrigger>
+    <scope>text.html.basic.dedalus</scope>
+    <description>Dedalus removeFromInventory</description>
+</snippet>

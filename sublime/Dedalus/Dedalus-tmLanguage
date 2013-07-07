@@ -1,0 +1,8 @@
+{ "name": "Dedalus",
+  "scopeName": "text.html.basic.dedalus",
+  "fileTypes": ["html"],
+  "patterns": [
+    {"include": "text.html.basic"}
+  ],
+  "uuid": "3d278171-87aa-470b-b9d6-e5d6e02c961b"
+}

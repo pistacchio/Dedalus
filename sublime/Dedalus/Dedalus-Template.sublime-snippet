@@ -1,0 +1,99 @@
+<snippet>
+    <content><![CDATA[<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>${1:title}</title>
+    <script src="http://olado.github.io/doT/doT.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+    <script src="dedalus.js"></script>
+    <script src="dedalus-web.js"></script>
+</head>
+<body>
+
+    <div id="story" style="display:none">
+
+        <initscript>
+        </initscript>
+
+        <beforeEveryThing>
+        </beforeEveryThing>
+
+        <beforeEveryPageTurn>
+        </beforeEveryPageTurn>
+
+        <beforeEveryParagraphShown>
+        </beforeEveryParagraphShown>
+
+        <afterEveryThing>
+        </afterEveryThing>
+
+        <afterEveryPageTurn>
+        </afterEveryPageTurn>
+
+        <afterEveryParagraphShown>
+        </afterEveryParagraphShown>
+
+        <!-- Novel -->
+        <title>${1:title}</title>
+
+        <!-- Objects -->
+        <obj id="firstObject" inventoryName="First object">
+            <action id="Examine">
+                The first object
+            </action>
+        </obj>
+
+        <!-- Pages -->
+        <page id="intro">
+            Intro text
+        </page>
+
+        <page id="firstPage" class="first">
+            First page. Link to <show paragraph="firstParagraph">first paragraph</show>
+
+            <paragraph id="firstParagraph">
+                First paragraph
+            </paragraph>
+        </page>
+    </div>
+
+    <div id="wrapper">
+        <div id="title"></div>
+
+        <div id="inventoryHostWrapper">
+            <h2>Inventory</h2>
+            <div id="inventoryHost"></div>
+        </div>
+
+        <div id="host"></div>
+    </div>
+
+    <div id="interactionHost"></div>
+
+    <div id="undoStageHost"></div>
+
+    <div id="footer">
+        <a id="undoHost" href="#">Undo</a> &bull; <a id="saveHost" href="#">Save</a> &bull; <a id="restoreHost" href="#">Restore</a> &bull; <a id="reseteHost" href="#">Reset</a>
+    </div>
+
+    <script>
+        new DedalusWeb({
+            domSource         : \$('#story'),
+            domTarget         : \$('#host'),
+            titleTarget       : \$('#title'),
+            inventoryTarget   : \$('#inventoryHost'),
+            interactionTarget : \$('#interactionHost'),
+            undoTarget        : \$('#undoHost'),
+            undoStageTarget   : \$('#undoStageHost'),
+            saveTarget        : \$('#saveHost'),
+            restoreTarget     : \$('#restoreHost'),
+            resetTarget       : \$('#reseteHost')
+        });
+    </script>
+</body>
+</html>]]></content>
+    <tabTrigger>dedtempl</tabTrigger>
+    <scope>text.html.basic.dedalus</scope>
+    <description>Dedalus template</description>
+</snippet>

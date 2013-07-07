@@ -28,6 +28,7 @@ You may want to read about the [tecnical details](#technicalDetails) or just kee
     *  [Managing large projects](#managingLargeProjects)
     *  [Utility functions recap and good luck](#utilityFunctionsRecapAndGoodLuck)
 *  [Technical details](#technicalDetails)
+*  [Tools](#tools)
 *  [Contacts](#contacts)
 
 <a name="gettingStarted"></a>
@@ -498,6 +499,12 @@ Dedalus is written in Javascript. It currently consists of two classes: `Dedalus
 In these scenarios, Dedalus would still provide the core engine, but it's up to the concrete implementation to manage user interaction, get the player's input and respond with an output that fits the medium. For example, DedalusWeb relies quite obviously on mouse clicks, but running Dedalus in a command shell should require a different handling of inputs.
 
 Dedalus depends on [jQuery](http://jquery.com/) and [doT.js](http://olado.github.io/doT/index.html), a simple but powerful template engine. DedalusWeb doesn't add any additional dependence.
+
+<a name="tools"></a>
+
+## Tools
+
+If your main editor is [Sublime Text 2](http://www.sublimetext.com/), you want to copy the content of the `sublime` directory in your Sublime Packages folder. This will give you access to a new language, *Dedalus*, that comes with handy snippets and syntax highlight.
 
 <a name="contacts"></a>
 

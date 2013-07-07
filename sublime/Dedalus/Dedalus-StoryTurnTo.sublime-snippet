@@ -1,0 +1,6 @@
+<snippet>
+    <content><![CDATA[story.turnTo($1)]]></content>
+    <tabTrigger>turnt</tabTrigger>
+    <scope>text.html.basic.dedalus</scope>
+    <description>Dedalus story.turnTo</description>
+</snippet>

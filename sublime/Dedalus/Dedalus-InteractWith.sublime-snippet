@@ -1,0 +1,6 @@
+<snippet>
+    <content><![CDATA[<interact with="$1">$2</interact>]]></content>
+    <tabTrigger>interact</tabTrigger>
+    <scope>text.html.basic.dedalus</scope>
+    <description>Dedalus interactWith</description>
+</snippet>

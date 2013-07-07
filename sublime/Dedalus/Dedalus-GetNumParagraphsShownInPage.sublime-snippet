@@ -1,0 +1,6 @@
+<snippet>
+    <content><![CDATA[story.getNumParagraphsShownInPage($1)]]></content>
+    <tabTrigger>npp</tabTrigger>
+    <scope>text.html.basic.dedalus</scope>
+    <description>Dedalus getNumParagraphsShownInPage</description>
+</snippet>

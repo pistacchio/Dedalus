@@ -1,0 +1,6 @@
+<snippet>
+    <content><![CDATA[story.getNumTotalActions($1)]]></content>
+    <tabTrigger>nact</tabTrigger>
+    <scope>text.html.basic.dedalus</scope>
+    <description>Dedalus getNumTotalActions</description>
+</snippet>

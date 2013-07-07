@@ -1,0 +1,10 @@
+<snippet>
+    <content><![CDATA[<character id="${1:CharacterName}">
+    <action id="${2:ActionName}">
+        ${3}
+    </action>
+</character>]]></content>
+    <tabTrigger>character</tabTrigger>
+    <scope>text.html.basic.dedalus</scope>
+    <description>Dedalus character</description>
+</snippet>

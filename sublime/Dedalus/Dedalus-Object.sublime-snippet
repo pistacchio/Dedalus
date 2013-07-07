@@ -1,0 +1,10 @@
+<snippet>
+    <content><![CDATA[<obj id="${1:ObjectName}">
+    <action id="${2:ActionName}">
+        ${3}
+    </action>
+</obj>]]></content>
+    <tabTrigger>dobj</tabTrigger>
+    <scope>text.html.basic.dedalus</scope>
+    <description>Dedalus object</description>
+</snippet>

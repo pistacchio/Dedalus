@@ -1,0 +1,6 @@
+<snippet>
+    <content><![CDATA[<turn with="$1">$2</turn>]]></content>
+    <tabTrigger>turn</tabTrigger>
+    <scope>text.html.basic.dedalus</scope>
+    <description>Dedalus turnTo</description>
+</snippet>

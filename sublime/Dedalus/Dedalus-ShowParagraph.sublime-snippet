@@ -1,0 +1,6 @@
+<snippet>
+    <content><![CDATA[story.showParagraph($1)]]></content>
+    <tabTrigger>showp</tabTrigger>
+    <scope>text.html.basic.dedalus</scope>
+    <description>Dedalus showParagraph</description>
+</snippet>

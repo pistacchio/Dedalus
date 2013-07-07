@@ -1,0 +1,6 @@
+<snippet>
+    <content><![CDATA[story.endGame($1)]]></content>
+    <tabTrigger>end</tabTrigger>
+    <scope>text.html.basic.dedalus</scope>
+    <description>Dedalus endGame</description>
+</snippet>

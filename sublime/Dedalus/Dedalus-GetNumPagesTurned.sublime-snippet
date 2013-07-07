@@ -1,0 +1,6 @@
+<snippet>
+    <content><![CDATA[story.getNumPagesTurned($1)]]></content>
+    <tabTrigger>npt</tabTrigger>
+    <scope>text.html.basic.dedalus</scope>
+    <description>Dedalus getNumPagesTurned</description>
+</snippet>

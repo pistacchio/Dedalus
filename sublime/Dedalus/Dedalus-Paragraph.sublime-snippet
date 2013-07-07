@@ -1,0 +1,8 @@
+<snippet>
+    <content><![CDATA[<paragraph id="${1:ParagraphName}">
+    <p>${2}</p>
+</paragraph>]]></content>
+    <tabTrigger>para</tabTrigger>
+    <scope>text.html.basic.dedalus</scope>
+    <description>Dedalus paragraph</description>
+</snippet>
