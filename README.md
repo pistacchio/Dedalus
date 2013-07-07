@@ -255,7 +255,7 @@ Everything we said and we'll say on objects stands true for `characters`. Defini
 Ok, you licked the blaster. How about taking it now?
 
 ``` xml
-<obj id="vintageBlaster">
+<obj id="vintageBlaster" inventoryName="Vintage blaster">
     <action id="Examine">
         It seems in good condition, considering the age.
     </action>
@@ -275,7 +275,7 @@ Where the hell `putInInventory` comes from? You didn't define it! Turns out that
 * `story.removeFromInventory(<ID OF THE OBJECT>)`
 * `story.isInInventory(<ID OF THE OBJECT>)`
 
-Their usage is pretty obvious, isn't it?
+Their usage is pretty obvious, isn't it? Just take note of the attribute `inventoryName`: it is optional, you must specify it only for those object that can eventually be stored in the inventory and represents the name they're presented with.
 
 <a name="optionalActions"></a>
 
