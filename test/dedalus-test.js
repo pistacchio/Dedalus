@@ -130,6 +130,13 @@ test('Page turning from script', function () {
     ok(story.currentPageIs('fourthPage'));
 });
 
+test('Characters', function () {
+   ok(notContain($('#host'), 'Bla Bla'));
+    $('a:contains("character")').click();
+    $('a:contains("Talk")').click();
+    ok(contain($('#host'), 'Bla Bla'));
+});
+
 test('End gane', function () {
     $('a:contains("third page")').click();
     equal($('#host a').length, 3);
