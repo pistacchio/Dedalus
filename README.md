@@ -2,7 +2,7 @@
 
 Dedalus is an authoring system for generating *Choose Your Own Adventure* (CYOA) narrative. It is similar to other creation tools like [Twine](http://www.gimcrackd.com/etc/src/), [Undum](http://undum.com/) or [Varytale](http://varytale.com/books/).
 
-Games created with Dedalus can run in the browser, so they are very easy to deliver to potential player.
+Games created with Dedalus can run in the browser, so they are very easy to deliver to potential players.
 
 A sample game can be played [here](http://pistacchio.github.com/Dedalus/cloak.html). It is an implementation of [Cloak of Darkess](http://www.firthworks.com/roger/cloak/), a very simple story meant just to showcase how different authoring systems implement the same game. Mind that the original Cloak of Darkess is thought for *Interactive Fiction* (IF), while Dedalus generates CYOAs, a different, but related, kind of interactive narrative.
 You can read the source code of Cloak of Darkess in the example directory.
@@ -25,6 +25,7 @@ You may want to read about the [tecnical details](#technicalDetails) or just kee
     *  [Optional actions](#optionalActions)
     *  [Before and after actions](#beforeAndAfterActions)
     *  [Counters](#counters)
+    *  [Managing large projects](#managingLargeProjects)
     *  [Utility functions recap and good luck](#utilityFunctionsRecapAndGoodLuck)
 *  [Technical details](#technicalDetails)
 *  [Contacts](#contacts)
@@ -415,6 +416,53 @@ We take note of the current value of the counter `getNumTotalActions()`. Now our
 Omitting the fact that when the air goes away the hero dies eaten by a grue without much more explained (!), we see here how before/after actions and counters are a powerful combination that let us add dynamic behaviour that is not bound to pages and paragraphs but that has a global scope, eventually linked with in-game pace.
 
 `story.endGame()` is yet another utility function that the system provides and without surprice puts a halt to the story.
+
+<a name="managingLargeProjects"></a>
+
+### Managing large projects
+
+Sooner or later, your stories are going to be very large and `<initscript>` can become pretty crowded with variables and custom functions. It is essential here not to forget that, in the end, we are really just writing Javascript and everything we use day by day to keep or scripting organized can be applied. For example, what if you end up having dozens of different weapons that Matsushima can use? It might make sense to group them in a module like this:
+
+``` xml
+<initscript>
+    story.weapons          = {};
+    story.weapons.laserGun = {
+        power:   10,
+        bullets: 20,
+        shoot:   function () {
+            return "Zoooop! Zaaaaap";
+        };
+    };
+    story.weapons.rocketLauncher = { /* ... */ };
+</initscript>
+```
+
+Also, if you are really going for something massive, it might make sense to split the code in multiple files:
+
+``` xml
+<!-- content of weapon.js -->
+function makeWeapons () {
+    story.weapons                = {};
+    story.weapons.laserGun       = { /* laser gun code */ };
+    story.weapons.rocketLauncher = { /* rocket launcher code */ }
+    [..]
+}
+
+<head>
+    <script src="weapons.js"></script>
+    [..]
+</head>
+
+[..]
+
+<initscript>
+    makeWeapons();
+    makeCharacters();
+    makeShipEvents();
+    makeBeetlegeuseDesperationMazeEvents();
+    [..]
+</initscript>
+```
 
 <a name="utilityFunctionsRecapAndGoodLuck"></a>
 
