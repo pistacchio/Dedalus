@@ -8,12 +8,16 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
     <script src="../src/dedalus.js"></script>
     <script src="../src/dedalus-web.js"></script>
+    <script src="../src/dedlee/dedalus-dedlee.js"></script>
 </head>
 <body>
 
-    <div id="story" style="display:none">
+    <div id="story" style="display:none"></div>
 
-        <initscript>
+    <div id="dedleeSource" style="display: none;">
+        QUnit testing story!
+
+        initscript
             story.customVariable            = 42;
             story.beforeEveryPageTurnCheck  = false;
             story.afterEveryPageTurnCheck   = false;
@@ -21,86 +25,64 @@
             story.afterEveryParagraphCheck  = false
             story.beforeEverytingCounter    = 0;
             story.afterEverytingCounter     = 0;
-        </initscript>
 
-        <beforeEveryThing>
+        beforeEveryThing
             story.beforeEverytingCounter += 7;
-        </beforeEveryThing>
 
-        <beforeEveryPageTurn>
+        beforeEveryPageTurn
             if (story.currentPageIs('secondPage')) {
                 story.beforeEveryPageTurnCheck = true;
             }
-        </beforeEveryPageTurn>
 
-        <beforeEveryParagraphShown>
+        beforeEveryParagraphShown
             if (story.currentPageIs('thirdPage')) {
                 story.beforeEveryParagraphCheck = true;
             }
-        </beforeEveryParagraphShown>
 
-        <afterEveryThing>
+        afterEveryThing
             story.afterEverytingCounter -= 7;
-        </afterEveryThing>
 
-        <afterEveryPageTurn>
+        afterEveryPageTurn
             if (story.currentPageIs('thirdPage')) {
                 story.afterEveryPageTurnCheck = true;
             }
-        </afterEveryPageTurn>
 
-        <afterEveryParagraphShown>
+        afterEveryParagraphShown
             if (story.currentPageIs('thirdPage')) {
                 story.afterEveryParagraphCheck = true;
             }
-        </afterEveryParagraphShown>
 
-        <!-- Novel -->
-        <title>QUnit testing story!</title>
 
-        <!-- Objects -->
-        <obj id="firstObject" inventoryName="First object">
-            <action id="Examine">
+        o.firstObject "First object"
+            "Examine"
                 Just a simple object
-            </action>
-
-            <action id="Get">
-                <when>!story.isInInventory('firstObject')</when>
+            "Get"
+                when !story.isInInventory('firstObject')
                 First object taken
+                when false when!
                 {{ story.putInInventory('firstObject'); }}
-            </action>
-
-            <action id="Drop">
-                <when>story.isInInventory('firstObject')</when>
+            "Drop"
+                when story.isInInventory('firstObject')
                 Object dropped
                 {{ story.removeFromInventory('firstObject'); }}
-            </action>
-        </obj>
 
-        <obj id="secondObject">
-            <action id="Show Paragraph">
+        o.secondObject
+            "Show Paragraph"
                 {{ story.showParagraph('thirdParagraph'); }}
-            </action>
-
-            <action id="Turn Page">
+            "Turn Page"
                 {{ story.turnTo('fourthPage'); }}
-            </action>
-        </obj>
 
-        <!-- Pages -->
-        <page id="intro">
+        p.intro
             Intro text
-        </page>
 
-        <page id="firstPage" class="first">
-            First page. Link to <turn to="secondPage">second page</turn>
-        </page>
+        p.firstPage (first)
+            First page. Link to [[secondPage]]second page[[]]
 
-        <page id="secondPage">
+        p.secondPage
             Second page.
-            Link to <turn to="thirdPage">third page</turn>
+            Link to [[thirdPage]]third page[[]]
 
-            Link to <show paragraph="firstParagraph">first paragraph</show>
+            Link to ((firstParagraph))first paragraph(())
 
             {{? story.customVariable == 42 }}
                 <p>Should show</p>
@@ -108,40 +90,31 @@
                 <p>Shouldn't show</p>
             {{?}}
 
-            <paragraph id="firstParagraph">
+            pg.firstParagraph
                 Some paragraph
-            </paragraph>
-        </page>
 
-        <page id="thirdPage">
+        p.thirdPage
             Third Page
-            Link to <show paragraph="secondParagraph">second paragraph</show>
+            Link to ((secondParagraph))second paragraph(())
 
-            <interact with="firstObject">first object</interact>
+            {[firstObject]}first object{[]}
 
-            <interact with="secondObject">second object</interact>
+            {[secondObject]}second object{[]}
 
-            <paragraph id="secondParagraph">
+            pg.secondParagraph
                 Second paragraph
-            </paragraph>
-        </page>
 
-        <page id="fourthPage">
+        p.fourthPage
             Fourth Page
-            Back to <turn to="thirdPage">third page</turn>
-            Talk to a <interact with="firstCharacter">character</interact>
-        </page>
+            Back to [[thirdPage]]third page[[]]
+            Talk to a {[firstCharacter]}character{[]}
 
-        <paragraph id="thirdParagraph">
+        pg.thirdParagraph
             Third paragraph
-        </paragraph>
 
-        <character id="firstCharacter">
-            <action id="Talk">
+        c.firstCharacter
+            "Talk"
                 Bla Bla
-            </action>
-        </character>
-
     </div>
 
     <div id="wrapper">
@@ -171,6 +144,7 @@
 
     <script>
         new DedalusWeb({
+            dedleeSource      : $('#dedleeSource'),
             domSource         : $('#story'),
             domTarget         : $('#host'),
             titleTarget       : $('#title'),

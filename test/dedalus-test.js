@@ -8,7 +8,7 @@ function notContain (jQueryElement, text) {
 }
 
 // QUnit configuration
-QUnit.config.reorder = false;
+QUnit.config.reorder   = false;
 
 // Test cases
 test('Title set', function () {
@@ -137,7 +137,7 @@ test('Characters', function () {
     ok(contain($('#host'), 'Bla Bla'));
 });
 
-test('End gane', function () {
+test('End game', function () {
     $('a:contains("third page")').click();
     equal($('#host a').length, 3);
     equal($.trim($('#host').text()), 'Third Page Link to second paragraph first object second object');

@@ -9,6 +9,8 @@ You can read the source code of Cloak of Darkess in the example directory.
 
 You may want to read about the [tecnical details](#technicalDetails) or just keep reading the tutorial and start creating amazing adventures!
 
+**Note:** The tutorial illustrates how to write Dedalus stories in the most "canonical" way, but there an alternative syntax for writig Dedalus narrative called [Dedlee](#dedlee). It doesn't make use of HTML-like syntax, and you might prefer it. However, you should really follow the tutorial closely, it is short, easy and fun, and *then* have a look at Dedlee and decide what system you prefer.
+
 ## Table of contents
 
 *  [Getting started](#gettingStarted)
@@ -27,6 +29,9 @@ You may want to read about the [tecnical details](#technicalDetails) or just kee
     *  [Counters](#counters)
     *  [Managing large projects](#managingLargeProjects)
     *  [Utility functions recap and good luck](#utilityFunctionsRecapAndGoodLuck)
+*  [Dedlee](#dedlee)
+    * [Syntax](#dedleeSyntax)
+    * [Setup](#dedleeSetup)
 *  [Technical details](#technicalDetails)
 *  [Tools](#tools)
 *  [Contacts](#contacts)
@@ -490,6 +495,217 @@ This is it. Dedalus is a powerful tool to express your creativity and with it op
 
 If you feel like something is missing (or find a bug!), please contribute to the project. It is released as Free and Open Source Software, so, really, as you use it it yours :)
 
+<a name="dedlee"></a>
+
+## Dedlee
+
+If you're not fency of writing HTML or you think it would interfear with the stream of your creativity, you can adopt a different, more light-weight syntax to write Dedalus narrative. It is called *Dedlee*.
+
+Under the hood, everything we said so far stands true. ULtimately Dedalus will turn your source code written in Dadlee in the HTML-like syntax seen so far.
+
+That being said, I encourage you to use the main syntax described in the tutorial. When possible, relying in tested and proved technologies is always better, and HTML has been around for the last 20 or so years, a bit more than Dedlee, so it puts in your hands much more flexibility and tools to write and check it.
+
+<a name="dedleeSetup"></a>
+
+### Setup
+
+To use Dedlee you need to add an additional tag to your document to host your code and make the system aware of this.
+
+``` xml
+<script>
+    $(function () {
+        new DedalusWeb({
+            dedleeSource      : $('#dedleeSource'), // <-- NOTE!
+            domSource         : $('#story'),
+            domTarget         : $('#host'),
+            titleTarget       : $('#title'),
+            inventoryTarget   : $('#inventoryHost'),
+            interactionTarget : $('#interactionHost'),
+            undoTarget        : $('#undoHost'),
+            undoStageTarget   : $('#undoStageHost'),
+            saveTarget        : $('#saveHost'),
+            restoreTarget     : $('#restoreHost'),
+            resetTarget       : $('#reseteHost'),
+        });
+    });
+</script>
+```
+You need to add a new configuration option, `dedleeSource`. This is where your code resides and hence this should an invisible tag just like `domSource`. Leave the element defined in `domSource` empty because it will be automatically filled with the ouput of parsing Dadlee. You can then write your story within `dedleeSource` like normal text. For example, this is how the beginning of "Captain Matsushima..." would look like in Dedlee within the page.
+
+``` xml
+<div id="dedleeSource" style="display:none">
+    Captain Matsushima and the rainbow spitting Fungi
+
+    p.intro
+        As the vessel approaches the third moon of Bellerophon, suddenly the lights in the control room go down. Something is not right here, and you, as captain Jonah Matsushima, are about to start an amazing journey to find out what it is!
+
+    p.controlRoom (first)
+        A room full of monitors, beeping machines and other archetypal sci-fi things.
+</div>
+```
+
+<a name="dedleeSyntax"></a>
+
+### Syntax
+
+We are not going to rewalk the tutorial. Dedlee doesn't add any new concept and a seasoned Dedalus author like you surely won't have any problem grasping it all.
+
+Before presenting a side by side comparison of how to write the same things both in straight Dedalus and in Dedlee, let's focus on the single important feature of Dedlee you must never ignore:
+
+**In Dedlee indentation is relevant and it defines blocks**
+
+Read it aloud ten times, now! Since we decided to leave the world of XML syntaxes, we got rid of `</closing> </tags>`, so we need a way to tell a page or a paragraph or an action when its content is over. Dedlee relies on meaningful *indentation*. This means that when you define a block (for example a page) everything after it that is more indented is considered to belog to it. Example:
+
+```
+    p.firstPage
+        <div>Inside page</div>
+
+    <div>Outside page</div>
+```
+
+This allowes us to declare visually what belongs to what. Since "Outside page" is at the *same level* of the page (`p.PAGE_ID` is Dedlee syntax to define a new page, as we'll see in a short while) it does not belong it it, while "Inside page", having a deeper indentation, does.
+
+The following table, also useful as a brief cheatsheet for Dedalus, compares the two syntaxes and should be all you need to know to write Dedlee.
+
+<table>
+    <tr>
+        <th>Dedalus</th>
+        <th>Dedlee</th>
+    </tr>
+    <tr>
+        <td>&lt;title&gt;My Story&lt;/tilte&gt;</td>
+        <td>The *very first* line of Dedlee source is treated like the title of the story</td>
+    </tr>
+    <tr>
+        <td>
+            &lt;initscript&gt;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;story.newVar = 1;<br>
+            &lt;/initscript&gt;
+        </td>
+        <td style="vertical-align: top">
+            initscript<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;story.newVar = 1;
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Before/After actions<br><br>
+            &lt;beforeEverything&gt;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;doSomething();<br>
+            &lt;/beforeEverything&gt;<br>
+            [..]
+        </td>
+        <td style="vertical-align: top">
+            beforeEverything<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;doSomething();<br>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            &lt;page id="intro"&gt;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;Page description<br>
+            &lt;/page&gt;<br><br>
+            &lt;page id="firstPage" class="first"&gt;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;Page description 2<br>
+            &lt;/page&gt;
+        </td>
+        <td style="vertical-align: top">
+            p.intro<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;Page description<br><br>
+            p.intro (first)<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;Page description 2
+        </td>
+    </tr>
+    <tr>
+        <td>
+            &lt;object id="firstObject" inventoryName="First Object"&gt;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&lt;when&gt;story.isExaminable()&lt;when&gt;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&lt;action id="Examine"&gt;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This is the first object<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&lt;/action&gt;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&lt;action id="Take"&gt;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Taken<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ story.putInInventory('firstObject'); }}<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&lt;/action&gt;<br>
+            &lt;/object&gt;
+        </td>
+        <td style="vertical-align: top">
+            o.firstObject "First Object"<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;when story.isExaminable()<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;"Examine"<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This is the first object<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;"Take"<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Taken<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ story.putInInventory('firstObject'); }}<br>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            &lt;character id="firstCharacter"&gt;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&lt;action id="Examine"&gt;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This is the first character<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&lt;/action&gt;<br>
+            &lt;/character&gt;
+        </td>
+        <td style="vertical-align: top">
+            c.firstCharacter<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;"Examine"<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This is the first character<br>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            &lt;paragraph id="firstParagraph"&gt;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;First paragraph<br>
+            &lt;/paragraph&gt;
+        </td>
+        <td style="vertical-align: top">
+            pg.firstParagraph<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;First paragraph
+        </td>
+    </tr>
+    <tr>
+        <td>
+            &lt;page id="secondPage"&gt;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;Link to the &lt;turn to="firstPage"&gt;first page&lt;/turn&gt;<br>
+            &lt;/page&gt;
+        </td>
+        <td style="vertical-align: top">
+            p.secondPage<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;Link to the [[firstPage]]first page[[]]<br>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            &lt;page id="thirdPage"&gt;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;Show the &lt;show paragraph="secondParagraph"&gt;second paragraph&lt;/show&gt;<br><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&lt;paragraph id="secondParagraph"&gt;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Second paragraph<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&lt;/paragraph&gt;<br>
+            &lt;/page&gt;
+        </td>
+        <td style="vertical-align: top">
+            p.thirdPage<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;Show the ((secondParagraph))second paragraph(())<br><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;pg.secondParagraph <br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Second paragraph<br>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            &lt;page id="fourthPage"&gt;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;Interact with the &lt;interact with="firstObject"&gt;first object&lt;/interact&gt;<br>
+            &lt;/page&gt;
+        </td>
+        <td style="vertical-align: top">
+            p.fourthPage<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;Interact with the {[firstObject]}first object{[]}<br>
+        </td>
+    </tr>
+</table>
+
+For a complete example, compare the implementation of Clock of Darkess in Dedalus standard format (`/example/cloak.html`) with the source in Dedlee format (`/example/dedlee/cloak.dedlee`)
+
 <a name="technicalDetails"></a>
 
 ## Technical details
@@ -504,7 +720,7 @@ Dedalus depends on [jQuery](http://jquery.com/) and [doT.js](http://olado.github
 
 ## Tools
 
-If your main editor is [Sublime Text 2](http://www.sublimetext.com/), you want to copy the content of the `sublime` directory in your Sublime Packages folder. This will give you access to a new language, *Dedalus*, that comes with handy snippets and syntax highlight.
+If your main editor is [Sublime Text 2](http://www.sublimetext.com/), you want to copy the content of the `sublime` directory in your Sublime Packages folder. This will give you access to a new language, *Dedalus*, that comes with handy snippets and syntax highlight for Dedlee!
 
 <a name="contacts"></a>
 

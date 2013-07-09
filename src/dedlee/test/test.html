@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>DedalusWeb Tests</title>
+    <link rel="stylesheet" href="http://code.jquery.com/qunit/qunit-1.12.0.css">
+    <script src="http://olado.github.io/doT/doT.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+    <script src="../../dedalus.js"></script>
+    <script src="../dedalus-dedlee.js"></script>
+</head>
+<body>
+
+    <div id="source">
+        QUnit testing story!
+
+        initscript
+            story.customVariable            = 42;
+            story.beforeEveryPageTurnCheck  = false;
+            story.afterEveryPageTurnCheck   = false;
+            story.beforeEveryParagraphCheck = false;
+            story.afterEveryParagraphCheck  = false
+            story.beforeEverytingCounter    = 0;
+            story.afterEverytingCounter     = 0;
+
+        beforeEveryThing
+            story.beforeEverytingCounter += 7;
+
+        beforeEveryPageTurn
+            if (story.currentPageIs('secondPage')) {
+                story.beforeEveryPageTurnCheck = true;
+            }
+
+        beforeEveryParagraphShown
+            if (story.currentPageIs('thirdPage')) {
+                story.beforeEveryParagraphCheck = true;
+            }
+
+        afterEveryThing
+            story.afterEverytingCounter -= 7;
+
+        afterEveryPageTurn
+            if (story.currentPageIs('thirdPage')) {
+                story.afterEveryPageTurnCheck = true;
+            }
+
+        afterEveryParagraphShown
+            if (story.currentPageIs('thirdPage')) {
+                story.afterEveryParagraphCheck = true;
+            }
+
+
+        o.firstObject "First object"
+            "Examine"
+                Just a simple object
+            "Get"
+                when !story.isInInventory('firstObject')
+                First object taken
+                when false when!
+                {{ story.putInInventory('firstObject'); }}
+            "Drop"
+                when story.isInInventory('firstObject')
+                Object dropped
+                {{ story.removeFromInventory('firstObject'); }}
+
+        o.secondObject
+            "Show Paragraph"
+                {{ story.showParagraph('thirdParagraph'); }}
+            "Turn Page"
+                {{ story.turnTo('fourthPage'); }}
+
+        p.intro
+            Intro text
+
+        p.firstPage (first)
+            First page. Link to [[secondPage]]second page[[]]
+
+        p.secondPage
+            Second page.
+            Link to [[thirdPage]]third page[[]]
+
+            Link to ((firstParagraph))first paragraph(())
+
+            {{? story.customVariable == 42 }}
+                <p>Should show</p>
+            {{??}}
+                <p>Shouldn't show</p>
+            {{?}}
+
+            pg.firstParagraph
+                Some paragraph
+
+        p.thirdPage
+            Third Page
+            Link to ((secondParagraph))second paragraph(())
+
+            {[firstObject]}first object{[]}
+
+            {[secondObject]}second object{[]}
+
+            pg.secondParagraph
+                Second paragraph
+
+        p.fourthPage
+            Fourth Page
+            Back to [[thirdPage]]third page[[]]
+            Talk to a {[firstCharacter]}character{[]}
+
+        pg.thirdParagraph
+            Third paragraph
+
+        c.firstCharacter
+            "Talk"
+                Bla Bla
+    </div>
+
+    <div id="target">
+    </div>
+
+    <div id="qunit" style="margin-top: 100px"></div>
+    <div id="qunit-fixture"></div>
+
+    <script src="http://code.jquery.com/qunit/qunit-1.12.0.js"></script>
+
+    <script src="dedalus-dedlee-test.js"></script>
+</body>
+</html>
+
