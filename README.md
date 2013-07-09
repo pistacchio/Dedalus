@@ -702,6 +702,14 @@ The following table, also useful as a brief cheatsheet for Dedalus, compares the
             &nbsp;&nbsp;&nbsp;&nbsp;Interact with the {[firstObject]}first object{[]}<br>
         </td>
     </tr>
+    <tr>
+        <td>
+            &lt;!-- Comment --&gt;
+        </td>
+        <td style="vertical-align: top">
+            # Comment
+        </td>
+    </tr>
 </table>
 
 For a complete example, compare the implementation of Clock of Darkess in Dedalus standard format (`/example/cloak.html`) with the source in Dedlee format (`/example/dedlee/cloak.dedlee`)
