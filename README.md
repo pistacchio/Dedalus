@@ -515,7 +515,7 @@ To use Dedlee you need to add an additional tag to your document to host your co
 <script>
     $(function () {
         new DedalusWeb({
-            dedleeSource      : $('#dedleeSource'), <-- NOTE! -->
+            dedleeSource      : $('#dedleeSource'), <!-- NOTE! --!>
             domSource         : $('#story'),
             domTarget         : $('#host'),
             titleTarget       : $('#title'),
