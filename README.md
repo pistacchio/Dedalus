@@ -1,4 +1,4 @@
-# Dedalus
+![Dedalus logo](http://pistacchio.github.io/Dedalus/static/logo.png)
 
 Dedalus is an authoring system for generating *Choose Your Own Adventure* (CYOA) narrative. It is similar to other creation tools like [Twine](http://www.gimcrackd.com/etc/src/), [Undum](http://undum.com/) or [Varytale](http://varytale.com/books/).
 
