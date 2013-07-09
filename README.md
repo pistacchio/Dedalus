@@ -730,6 +730,8 @@ Dedalus depends on [jQuery](http://jquery.com/) and [doT.js](http://olado.github
 
 If your main editor is [Sublime Text 2](http://www.sublimetext.com/), you want to copy the content of the `sublime` directory in your Sublime Packages folder. This will give you access to a new language, *Dedalus*, that comes with handy snippets and syntax highlight for Dedlee!
 
+![Dedlee syntax highlight](http://pistacchio.github.io/Dedalus/static/dedlee-highlight.png)
+
 <a name="contacts"></a>
 
 ## Contacts
