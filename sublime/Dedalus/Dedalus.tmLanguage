@@ -243,6 +243,22 @@
 			<string>meta.function.dedlee</string>
 		</dict>
 		<dict>
+			<key>captures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>comment.line.double-slash.js</string>
+				</dict>
+			</dict>
+			<key>comment</key>
+			<string>Action</string>
+			<key>match</key>
+			<string>^\s*(\#.*)</string>
+			<key>name</key>
+			<string>meta.function.dedlee</string>
+		</dict>
+		<dict>
 			<key>begin</key>
 			<string>(\(\(|\[\[|\{\[)</string>
 			<key>beginCaptures</key>

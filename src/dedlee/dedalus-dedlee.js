@@ -14,7 +14,7 @@ Dedalus.prototype.parseDedlee = function (inputSource, target) {
         lineCounter,
         cleanSource    = Dedalus.getRawContent(inputSource),
         sourceLines    = cleanSource.match(/[^\r\n]+/g),
-        notEmptyLines  = removeEmptyLines(sourceLines),
+        notEmptyLines  = removeEmptyLinesAndComments(sourceLines),
         source         = indentToMin(notEmptyLines),
         scriptTags     = ['initscript', 'beforeEveryThing', 'beforeEveryPageTurn', 'beforeEveryParagraphShown', 'afterEveryThing', 'afterEveryPageTurn', 'afterEveryParagraphShown'];
 
@@ -236,13 +236,13 @@ Dedalus.prototype.parseDedlee = function (inputSource, target) {
     }
 
     /**
-     * Given an array of strings, return only those that are not empty
+     * Given an array of strings, return only those that are not empty.
      * @param  {Array} strings Strings to filter
      * @return {Array}         string without empty lines
      */
-    function removeEmptyLines(strings) {
+    function removeEmptyLinesAndComments(strings) {
         return strings.filter(function (str) {
-            return str.trim() !== '';
+            return str.trim() !== '' && !str.trim().startsWith('#')
         });
     }
 

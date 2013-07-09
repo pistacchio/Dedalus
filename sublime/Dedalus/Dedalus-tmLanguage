@@ -12,7 +12,7 @@
         },
        "end": "^\\s*$",
        "endCaptures": {},
-       "name": "meta.function.dedlee",
+       "name": "dedlee.blocks",
         "patterns": [
             {"include": "source.js"},
             {
@@ -38,7 +38,7 @@
                "name": "entity.name.tag.other.html"
             }
         },
-       "name": "meta.function.dedlee",
+       "name": "dedlee.links",
         "patterns": [
             {"include": "source.js"},
             {
@@ -60,7 +60,7 @@
         },
        "end": "$",
        "endCaptures": {},
-       "name": "meta.function.dedlee",
+       "name": "dedlee.when",
         "patterns": [
             {"include": "source.js"},
             {
@@ -88,7 +88,7 @@
         },
         "comment": "Object with inventory name",
         "match": "\\b(o\\.)(.*)(\\s+\".*\")",
-        "name": "meta.function.dedlee"
+        "name": "dedlee.objects.actions"
     },
     {
         "captures": {
@@ -101,7 +101,7 @@
         },
         "comment": "Object",
         "match": "\\b(o\\.)(.*)",
-        "name": "meta.function.dedlee"
+        "name": "dedlee.objects"
     },
     {
         "captures": {
@@ -116,9 +116,9 @@
                 "name": "variable.parameter.function"
             }
         },
-        "comment": "Page (first",
+        "comment": "Page (first)",
         "match": "\\b(p\\.)(.*)(\\s+\\(first\\))",
-        "name": "meta.function.dedlee"
+        "name": "dedlee.page.first"
     },
     {
         "captures": {
@@ -131,7 +131,7 @@
         },
         "comment": "Page, paragraph, initscript and before/after actions",
         "match": "\\b(p\\.|pg\\.)(.*)",
-        "name": "meta.function.dedlee"
+        "name": "dedlee.other.elements"
     },
     {
         "captures": {
@@ -141,6 +141,16 @@
         },
         "comment": "Action",
         "match": "^\\s*(\".*\")\\s*$",
+        "name": "meta.function.dedlee"
+    },
+    {
+        "captures": {
+            "1": {
+                "name": "comment.line.double-slash.js"
+            }
+        },
+        "comment": "Action",
+        "match": "^\\s*(\\#.*)",
         "name": "meta.function.dedlee"
     },
     {

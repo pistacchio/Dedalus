@@ -60,7 +60,7 @@ test('Characters', function () {
     equal(mergeText($('#target #firstCharacter action#Talk')), 'BlaBla');
 });
 
-test('Paragraphs', function () {
+test('Paragraphs (and comments)', function () {
     ok($('#target #firstParagraph'));
     ok($('#target #secondParagraph'));
     ok($('#target #thirdParagraph'));
