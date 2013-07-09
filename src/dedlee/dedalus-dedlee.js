@@ -10,6 +10,11 @@
  * @param  {jQuery} target      jQuery element where to append the  output of the parsing
  */
 Dedalus.prototype.parseDedlee = function (inputSource, target) {
+    "use strict";
+    /*jslint evil: true, white: true, nomen: true */
+    /*global $, Dedalus*/
+
+
     var i,
         lineCounter,
         cleanSource    = Dedalus.getRawContent(inputSource),
@@ -132,7 +137,7 @@ Dedalus.prototype.parseDedlee = function (inputSource, target) {
                     singleLine : true,
                     openTag    : function () { return line; },
                     closeTag   : null
-                },
+                }
             ],
             substRules = [
                 // [[PAGE_ID]]link to page[[]] => <turn to="PAGE_ID">link to page</turn>
@@ -152,8 +157,8 @@ Dedalus.prototype.parseDedlee = function (inputSource, target) {
                     applyTo    : 'page, paragraph, action',
                     replaceRgx : /\(\((.*)\)\)(.*)\(\(\)\)/g,
                     withRgx    : '<show paragraph="$1">$2</show>'
-                },
-            ]
+                }
+            ];
 
         /**
          * Recursive function to parse a block starting from the current line
@@ -172,7 +177,7 @@ Dedalus.prototype.parseDedlee = function (inputSource, target) {
 
             // Keep working till there are lines or code or the current block
             // ends
-            do  {
+            do {
                 // Search the appropriate rule
                 for (i = 0; i < rules.length; i += 1) {
                         rule = rules[i];
@@ -236,13 +241,14 @@ Dedalus.prototype.parseDedlee = function (inputSource, target) {
     }
 
     /**
-     * Given an array of strings, return only those that are not empty.
+     * Given an array of strings, return only those that are not empty and not
+     * commented (staring with #)
      * @param  {Array} strings Strings to filter
      * @return {Array}         string without empty lines
      */
     function removeEmptyLinesAndComments(strings) {
         return strings.filter(function (str) {
-            return str.trim() !== '' && !str.trim().startsWith('#')
+            return str.trim() !== '' && !str.trim().startsWith('#');
         });
     }
 
