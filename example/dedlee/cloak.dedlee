@@ -44,7 +44,7 @@ p.intro
     <div class="center">Cloak of Darkness</div>
     <div class="center">A basic IF demonstration.</div>
 
-p.foyer (first)
+p.foyer.first
     <p>You are standing in a spacious hall, splendidly decorated in red and gold, with glittering chandeliers overhead. There is an entrance from the ((street))street(()), and there are doorways [[bar]]south[[]] and [[cloakroom]]west.[[]]</p>
 
     pg.street
