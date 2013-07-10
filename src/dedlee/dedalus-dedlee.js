@@ -1,7 +1,7 @@
 /**
- * dedalus-dadlee.js v0.7
+ * dedalus-dadlee.js v0.7.3
  * 2013, Gustavo Di Pietro
- * Licensed under the MIT license (http://opensource.org/licenses/MIT)
+ * Licensed under the GPL license (http://www.gnu.org/licenses/gpl-2.0.html)
 **/
 
 /**
