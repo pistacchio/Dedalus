@@ -384,34 +384,52 @@ Also, note that we could have written the alter function right within afterEvery
 
 ### Disabling links
 
-Captain Mastsushima's ship has an additional artificial intelligence system just to manage weapons. It consists of a human brain in suspended animation that is in charge of taking the decicions Anna cannot take with her synthetic mind. Matsushima knows that he shouldn't enter the brain's room for it is very, very delicate and nothing there must be touched. But, you know, he's there searching for the *rainbow blaster*, a weaponon that he knows is on board but nobody could remember where exactly.
+Captain Mastsushima's ship has an additional artificial intelligence system just to manage weapons. It consists of a human brain in suspended animation that is in charge of taking the decisions Anna cannot take with her synthetic mind. Matsushima knows that he shouldn't enter the brain's room for it is very, very delicate and nothing there must be touched. But, you know, he's there searching for the *rainbow blaster*, a weapon that he knows is on board but nobody could remember where exactly.
 
 ``` xml
 <page id="brainRoom">
-    <p>A bright lighted room, almost empty. The white walls and candid floor are immaculate. The silence is deafening, you can almost hear the veins of the <interact with="brain">brain</interact> palpitate.</p>
+    <p>
+        A bright lighted room, almost empty. The white walls and candid floor are immaculate.
+        The silence is deafening, you can almost hear the veins
+        of the <interact with="brain">brain</interact> palpitate.
+    </p>
 
-    The brain lies on a short white metal colum. A couple of thin red tubes leave from the cerebellum and disappear in a little hole on the floor. A yellow post-it is attached on the column. It read: <em>"Captain, please, do not EVER touch this again!"</em>.
+    <p>
+        The brain lies on a short white metal column. A couple of thin red tubes leave
+        from the cerebellum and disappear in a little hole on the back side of the base.
+        A yellow post-it is attached to the pedestal.
+        It reads: <em>"Captain, please, do not EVER touch this again!"</em>.
+    </p>
 
     <object id="brain">
-        <action "Touch">
+        <action id="Touch">
             Something aweful and irreparable happens.
         </action>
     </object>
 </page>
 ```
 
-No need to explain what is going on here, right? Well, what if, for example, the brain explodes? What if you want the "touch" event to only happen once? Leaving things like they are now, the reader is able to repatedly click on "Touch", but we obviously want to allow this only once. We already know how to disable the action (`<when>!story.brainTouched</when>`) but what if we wanted to prevent the brain to be clicked at all? Sure, we can make the exploding action happen in another page, a different description of the room with the brain not available and a gory representation of the once-white walls all covered with splatters of grey matter.
+No need to explain what is going on here, right? Well, what if, for example, the brain explodes? What if you want the "Touch" event to only happen once? Leaving things like they are now, the reader is able to repatedly click on "Touch", but we obviously want to allow this only once. We already know how to disable the action (`<when>!story.brainTouched</when>`) but what if we wanted to prevent `brain` to be clicked at all? Sure, we can make the exploding action happen in another page, a different description of the room with the brain not available and a gory representation of the once-white walls all covered with splatters of grey matter.
 
-But we have the option of disabling and enabling a link at will. Just add ad to refer to it and use `story.disable(LINK_ID)` and `story.enable(LINK_ID)`.
+But Dedalus provides option of disabling and enabling a links at will. Just add ad to refer to it and use `story.disable(LINK_ID)` and `story.enable(LINK_ID)`.
 
 ``` xml
 <page id="brainRoom">
-    <p>A bright lighted room, almost empty. The white walls and candid floor are immaculate. The silence is deafening, you can almost hear the veins of the <interact with="brain" id="brainInteraction">brain</interact> palpitate.</p>
+    <p>
+        A bright lighted room, almost empty. The white walls and candid floor are immaculate.
+        The silence is deafening, you can almost hear the veins
+        of the <interact with="brain" id="brainInteraction">brain</interact> palpitate.
+    </p>
 
-    <p>The brain lies on a short white metal colum. A couple of thin red tubes leave from the cerebellum and disappear in a little hole on the floor. A yellow post-it is attached on the column. It read: <em>"Captain, please, do not EVER touch this again!"</em>.</p>
+    <p>
+        The brain lies on a short white metal column. A couple of thin red tubes leave
+        from the cerebellum and disappear in a little hole on the back side of the base.
+        A yellow post-it is attached to the pedestal.
+        It reads: <em>"Captain, please, do not EVER touch this again!"</em>.
+    </p>
 
     <object id="brain">
-        <action "Touch">
+        <action id="Touch">
             Something aweful and irreparable happens.
             {{ story.disable('brainInteraction'); }}
         </action>
@@ -427,8 +445,8 @@ After the paragraph is printed, `brain` ceases to be a link and becomes a normal
 
     <p><show paragraph="activatingParagraph">Activate it</show></p>
 
-    <paragraph>
-        {{ story.enable('activatingParagraph'); }}
+    <paragraph id="activatingParagraph">
+        {{ story.enable('disabledLink'); }}
     </paragraph>
 </page>
 ```
@@ -730,7 +748,7 @@ The following table, also useful as a brief cheatsheet for Dedalus, compares the
         </td>
         <td style="vertical-align: top">
             p.secondPage<br>
-            &nbsp;&nbsp;&nbsp;&nbsp;Link to the [[firstPage.linkId.linkClass]]first page[[]]<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;Link to the [[firstPage.linkId.]]first page[[]]<br>
         </td>
     </tr>
     <tr>
