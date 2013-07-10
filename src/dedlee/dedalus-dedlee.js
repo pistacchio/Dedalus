@@ -58,9 +58,13 @@ Dedalus.prototype.parseDedlee = function (inputSource, target) {
                     openTag    : function () {
                         var maybeInventory = (line.match(/\"(.*)\"/) || [])[1],
                             inventory      = maybeInventory ? 'inventoryName="' + maybeInventory + '"' : '',
-                            objectId       = line.split(' ')[0].substr(2);
+                            cleanLine      = line.replace(/(\".*\")/, ''),
+                            split          = cleanLine.trim().split('.'),
+                            objectId       = split[1],
+                            objectClass    = split.length === 3 ? 'class="' + split[2] + '"' : '';
 
-                        return '<obj id="' + objectId + '" ' + inventory + '>';
+
+                        return '<obj id="' + objectId + '" ' + inventory + ' ' + objectClass + '>';
                     },
                     closeTag   : function () { return '</obj>'; }
                 },
@@ -72,9 +76,12 @@ Dedalus.prototype.parseDedlee = function (inputSource, target) {
                     openTag    : function () {
                         var maybeInventory = (line.match(/\"(.*)\"/) || [])[1],
                             inventory      = maybeInventory ? 'inventoryName="' + maybeInventory + '"' : '',
-                            characterId    = line.split(' ')[0].substr(2);
+                            split          = line.trim().split('.'),
+                            characterId    = split[1],
+                            characterClass = split.length === 3 ? 'class="' + split[2] + '"' : '';
 
-                        return '<character id="' + characterId + '" ' + inventory + '>';
+
+                        return '<character id="' + characterId + '" ' + inventory + ' ' + characterClass + '>';
                     },
                     closeTag   : function () { return '</obj>'; }
                 },
@@ -110,11 +117,11 @@ Dedalus.prototype.parseDedlee = function (inputSource, target) {
                     check      : function () { return line.ltrim().startsWith('p.'); },
                     singleLine : false,
                     openTag    : function () {
-                        var isFirst    = line.indexOf('(first)') !== -1,
-                            classFirst = isFirst ? 'class="first"' : '',
-                            pageId     = line.ltrim().split(' ')[0].substr(2);
+                        var split      = line.trim().split('.'),
+                            pageId     = split[1],
+                            pageClass  = split.length === 3 ? 'class="' + split[2] + '"' : '';
 
-                        return '<page id="' + pageId + '" ' + classFirst + '>';
+                        return '<page id="' + pageId + '" ' + pageClass + '>';
                     },
                     closeTag   : function () { return '</page>'; }
                 },
@@ -124,9 +131,11 @@ Dedalus.prototype.parseDedlee = function (inputSource, target) {
                     check      : function () { return line.ltrim().startsWith('pg.'); },
                     singleLine : false,
                     openTag    : function () {
-                        var paragraphId = line.ltrim().split(' ')[0].substr(3);
+                        var split          = line.trim().split('.'),
+                            paragraphId    = split[1],
+                            paragraphClass = split.length === 3 ? 'class="' + split[2] + '"' : '';
 
-                        return '<paragraph id="' + paragraphId + '">';
+                        return '<paragraph id="' + paragraphId + '" ' + paragraphClass + '>';
                     },
                     closeTag   : function () { return '</paragraph>'; }
                 },
@@ -217,14 +226,43 @@ Dedalus.prototype.parseDedlee = function (inputSource, target) {
 
         // Withing every block of text that requires it, substitute placeholders
         // for links with actual <a>
-        function replaceLinks(index, el) {
-            $(el).html(Dedalus.getRawContent($(el)).replace(substRule.replaceRgx, substRule.withRgx));
-        }
-        for (i = 0; i < substRules.length; i += 1) {
-            var substRule = substRules[i];
+        (function () {
+            var substRule;
 
-            target.find(substRule.applyTo).each(replaceLinks);
-        }
+            function replaceLinks(index, el) {
+                // Apply the replace rules to the raw content of the current element
+                $(el).html(Dedalus.getRawContent($(el)).replace(substRule.replaceRgx, substRule.withRgx));
+
+                // Search for <turn>, <show>, <interact> whose attribute contains a
+                // dot and use it as an indicator of an id to be set. Example:
+                // <turn to="page.pageId">link</turn> => <turn to="page" id="pageId">link</turn>
+                // A third dot is treated like a class
+                // <turn to="page.pageId.pageClass">link</turn> => <turn to="page" id="pageId" class="pageClass">link</turn>
+                function setId(idx, e) {
+                    e = $(e);
+                    var split,
+                        attrib    = (e.attr('to') && 'to') || (e.attr('with') && 'with') || (e.attr('paragraph') && 'paragraph'),
+                        attribVal = e.attr(attrib);
+
+                    if (attribVal.indexOf('.') !== -1) {
+                        split = attribVal.split('.');
+                        e.attr(attrib, split[0]);
+                        e.attr('id', split[1]);
+                        if (split.length === 3) {
+                            e.addClass(split[2]);
+                        }
+                    }
+                }
+                $(el).find('turn, show, interact').each(setId);
+            }
+
+            for (i = 0; i < substRules.length; i += 1) {
+                substRule = substRules[i];
+
+                target.find(substRule.applyTo).each(replaceLinks);
+            }
+        }());
+
     }
 
     parseBlock();

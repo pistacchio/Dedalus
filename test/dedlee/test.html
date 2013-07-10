@@ -6,8 +6,8 @@
     <link rel="stylesheet" href="http://code.jquery.com/qunit/qunit-1.12.0.css">
     <script src="http://olado.github.io/doT/doT.min.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
-    <script src="../../dedalus.js"></script>
-    <script src="../dedalus-dedlee.js"></script>
+    <script src="../../src/dedalus.js"></script>
+    <script src="../../src/dedlee/dedalus-dedlee.js"></script>
 </head>
 <body>
 
@@ -50,7 +50,7 @@
             }
 
 
-        o.firstObject "First object"
+        o.firstObject.firstObjectClass "First object"
             "Examine"
                 Just a simple object
             "Get"
@@ -72,7 +72,7 @@
         p.intro
             Intro text
 
-        p.firstPage (first)
+        p.firstPage.first
             First page. Link to [[secondPage]]second page[[]]
 
         p.secondPage
@@ -87,7 +87,7 @@
                 <p>Shouldn't show</p>
             {{?}}
 
-            pg.firstParagraph
+            pg.firstParagraph.firstParagraphClass
                 Some paragraph
                 # This is not printed
 
@@ -97,7 +97,7 @@
 
             {[firstObject]}first object{[]}
 
-            {[secondObject]}second object{[]}
+            {[secondObject.withId.withClass]}second object{[]}
 
             pg.secondParagraph
                 Second paragraph
@@ -110,7 +110,7 @@
         pg.thirdParagraph
             Third paragraph
 
-        c.firstCharacter
+        c.firstCharacter.firstCharacterClass
             "Talk"
                 Bla Bla
     </div>

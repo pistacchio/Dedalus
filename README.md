@@ -26,6 +26,7 @@ You may want to read about the [tecnical details](#technicalDetails) or just kee
     *  [Inventory](#inventory)
     *  [Optional actions](#optionalActions)
     *  [Before and after actions](#beforeAndAfterActions)
+    *  [Disabling links](#disablingLinks)
     *  [Counters](#counters)
     *  [Managing large projects](#managingLargeProjects)
     *  [Utility functions recap and good luck](#utilityFunctionsRecapAndGoodLuck)
@@ -379,6 +380,61 @@ Also, note that we could have written the alter function right within afterEvery
 </afterEveryPageTurn>
 ```
 
+<a name="disablingLinks"></a>
+
+### Disabling links
+
+Captain Mastsushima's ship has an additional artificial intelligence system just to manage weapons. It consists of a human brain in suspended animation that is in charge of taking the decicions Anna cannot take with her synthetic mind. Matsushima knows that he shouldn't enter the brain's room for it is very, very delicate and nothing there must be touched. But, you know, he's there searching for the *rainbow blaster*, a weaponon that he knows is on board but nobody could remember where exactly.
+
+``` xml
+<page id="brainRoom">
+    <p>A bright lighted room, almost empty. The white walls and candid floor are immaculate. The silence is deafening, you can almost hear the veins of the <interact with="brain">brain</interact> palpitate.</p>
+
+    The brain lies on a short white metal colum. A couple of thin red tubes leave from the cerebellum and disappear in a little hole on the floor. A yellow post-it is attached on the column. It read: <em>"Captain, please, do not EVER touch this again!"</em>.
+
+    <object id="brain">
+        <action "Touch">
+            Something aweful and irreparable happens.
+        </action>
+    </object>
+</page>
+```
+
+No need to explain what is going on here, right? Well, what if, for example, the brain explodes? What if you want the "touch" event to only happen once? Leaving things like they are now, the reader is able to repatedly click on "Touch", but we obviously want to allow this only once. We already know how to disable the action (`<when>!story.brainTouched</when>`) but what if we wanted to prevent the brain to be clicked at all? Sure, we can make the exploding action happen in another page, a different description of the room with the brain not available and a gory representation of the once-white walls all covered with splatters of grey matter.
+
+But we have the option of disabling and enabling a link at will. Just add ad to refer to it and use `story.disable(LINK_ID)` and `story.enable(LINK_ID)`.
+
+``` xml
+<page id="brainRoom">
+    <p>A bright lighted room, almost empty. The white walls and candid floor are immaculate. The silence is deafening, you can almost hear the veins of the <interact with="brain" id="brainInteraction">brain</interact> palpitate.</p>
+
+    <p>The brain lies on a short white metal colum. A couple of thin red tubes leave from the cerebellum and disappear in a little hole on the floor. A yellow post-it is attached on the column. It read: <em>"Captain, please, do not EVER touch this again!"</em>.</p>
+
+    <object id="brain">
+        <action "Touch">
+            Something aweful and irreparable happens.
+            {{ story.disable('brainInteraction'); }}
+        </action>
+    </object>
+</page>
+```
+
+After the paragraph is printed, `brain` ceases to be a link and becomes a normal text until you *enable* it back. You can also start with a disabled link and activate it as a result of an action, just add `class="disabled"` to the link.
+
+``` xml
+<page id="brainRoom">
+    <p>This is just a <turn to="somePage" id="disabledLink" class="disabled">normal word</turn></p>
+
+    <p><show paragraph="activatingParagraph">Activate it</show></p>
+
+    <paragraph>
+        {{ story.enable('activatingParagraph'); }}
+    </paragraph>
+</page>
+```
+
+This mechanism works for `turn`, `interact` and `show` links.
+
 <a name="counters"></a>
 
 ### Counters
@@ -487,6 +543,8 @@ Here is a recap of all the functions that you can use in writing your games:
 * `story.getNumParagraphsShownInPage()`
 * `story.turnTo()`
 * `story.showParagraph()`
+* `story.enable()`
+* `story.disable()`
 * `story.endGame()`
 
 The only one we didn't encounter in our tutorial is `story.currentPageIs()`, but its usage is as useful as banal: `story.currentPageIs(<ID_OF_A_PAGE>)` and returns true or false based on the page currently being visualized.
@@ -612,13 +670,13 @@ The following table, also useful as a brief cheatsheet for Dedalus, compares the
         <td style="vertical-align: top">
             p.intro<br>
             &nbsp;&nbsp;&nbsp;&nbsp;Page description<br><br>
-            p.intro (first)<br>
+            p.intro.first<br>
             &nbsp;&nbsp;&nbsp;&nbsp;Page description 2
         </td>
     </tr>
     <tr>
         <td>
-            &lt;object id="firstObject" inventoryName="First Object"&gt;<br>
+            &lt;object id="firstObject" inventoryName="First Object" class="objectClass"&gt;<br>
             &nbsp;&nbsp;&nbsp;&nbsp;&lt;when&gt;story.isExaminable()&lt;when&gt;<br>
             &nbsp;&nbsp;&nbsp;&nbsp;&lt;action id="Examine"&gt;<br>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This is the first object<br>
@@ -630,7 +688,7 @@ The following table, also useful as a brief cheatsheet for Dedalus, compares the
             &lt;/object&gt;
         </td>
         <td style="vertical-align: top">
-            o.firstObject "First Object"<br>
+            o.firstObject.objectClass "First Object"<br>
             &nbsp;&nbsp;&nbsp;&nbsp;when story.isExaminable()<br>
             &nbsp;&nbsp;&nbsp;&nbsp;"Examine"<br>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This is the first object<br>
@@ -641,38 +699,38 @@ The following table, also useful as a brief cheatsheet for Dedalus, compares the
     </tr>
     <tr>
         <td>
-            &lt;character id="firstCharacter"&gt;<br>
+            &lt;character id="firstCharacter" class="characterClass"&gt;<br>
             &nbsp;&nbsp;&nbsp;&nbsp;&lt;action id="Examine"&gt;<br>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This is the first character<br>
             &nbsp;&nbsp;&nbsp;&nbsp;&lt;/action&gt;<br>
             &lt;/character&gt;
         </td>
         <td style="vertical-align: top">
-            c.firstCharacter<br>
+            c.firstCharacter.characterClass<br>
             &nbsp;&nbsp;&nbsp;&nbsp;"Examine"<br>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This is the first character<br>
         </td>
     </tr>
     <tr>
         <td>
-            &lt;paragraph id="firstParagraph"&gt;<br>
+            &lt;paragraph id="firstParagraph" class="paragraphClass"&gt;<br>
             &nbsp;&nbsp;&nbsp;&nbsp;First paragraph<br>
             &lt;/paragraph&gt;
         </td>
         <td style="vertical-align: top">
-            pg.firstParagraph<br>
+            pg.firstParagraph.paragraphClass<br>
             &nbsp;&nbsp;&nbsp;&nbsp;First paragraph
         </td>
     </tr>
     <tr>
         <td>
             &lt;page id="secondPage"&gt;<br>
-            &nbsp;&nbsp;&nbsp;&nbsp;Link to the &lt;turn to="firstPage"&gt;first page&lt;/turn&gt;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;Link to the &lt;turn to="firstPage" id="linkId" class="linkClass"&gt;first page&lt;/turn&gt;<br>
             &lt;/page&gt;
         </td>
         <td style="vertical-align: top">
             p.secondPage<br>
-            &nbsp;&nbsp;&nbsp;&nbsp;Link to the [[firstPage]]first page[[]]<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;Link to the [[firstPage.linkId.linkClass]]first page[[]]<br>
         </td>
     </tr>
     <tr>

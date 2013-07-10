@@ -173,9 +173,9 @@
 				</dict>
 			</dict>
 			<key>comment</key>
-			<string>Object</string>
+			<string>Objects and Characters</string>
 			<key>match</key>
-			<string>\b(o\.)(.*)</string>
+			<string>\b(o\.|c\.)(.*)</string>
 			<key>name</key>
 			<string>meta.function.dedlee</string>
 		</dict>

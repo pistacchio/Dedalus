@@ -75,7 +75,7 @@
         p.intro
             Intro text
 
-        p.firstPage (first)
+        p.firstPage.first
             First page. Link to [[secondPage]]second page[[]]
 
         p.secondPage
@@ -101,13 +101,29 @@
 
             {[secondObject]}second object{[]}
 
+            Link to ((fourthParagraph.disableable))fourth paragraph(())
+
+            Re-enable ((fifthParagraph))fourth paragraph enable(())
+
+            ((sixthParagraph.disabledDisableable.disabled))Disabled link(())
+
             pg.secondParagraph
                 Second paragraph
+                {{ story.disable('disableable'); }}
+
+            pg.fourthParagraph
+                fourth paragraph content
+
+            pg.sixthParagraph
+                sixth paragraph content
+
+            pg.fifthParagraph
+                {{ story.enable('disableable'); }}
 
         p.fourthPage
             Fourth Page
             Back to [[thirdPage]]third page[[]]
-            Talk to a {[firstCharacter]}character{[]}
+            Talk to a {[firstCharacter.characterId]}character{[]}
 
         pg.thirdParagraph
             Third paragraph

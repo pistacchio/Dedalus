@@ -7,6 +7,11 @@ function notContain (jQueryElement, text) {
     return !contain(jQueryElement, text);
 }
 
+function mergeText (el) {
+    return el.text().replace(/\s+/g, '');
+}
+
+
 // QUnit configuration
 QUnit.config.reorder   = false;
 
@@ -137,11 +142,27 @@ test('Characters', function () {
     ok(contain($('#host'), 'Bla Bla'));
 });
 
-test('End game', function () {
+test('Id in links', function () {
+    equal($('#host a:contains("character")').attr('data-id'), 'characterId');
+});
+
+
+test('Disable/Enable', function () {
     $('a:contains("third page")').click();
-    equal($('#host a').length, 3);
-    equal($.trim($('#host').text()), 'Third Page Link to second paragraph first object second object');
+    $('a:contains("second paragraph")').click();
+    $('a:contains("fourth paragraph")').click();
+    equal($('#host').text().indexOf('fourth paragraph content'), -1);
+    $('a:contains("fourth paragraph enable")').click();
+    $('a:contains("fourth paragraph")').click();
+    notEqual($('#host').text().indexOf('fourth paragraph content'), -1);
+    $('a:contains("Disabled link")').click();
+    equal($('#host').text().indexOf('sixth paragraph content'), -1);
+});
+
+test('End game', function () {
+    equal($('#host a').length, 5);
+    equal(mergeText($('#host')), 'ThirdPageLinktosecondparagraphfirstobjectsecondobjectLinktofourthparagraphRe-enablefourthparagraphenableDisabledlinkSecondparagraphfourthparagraphcontent');
     story.endGame();
     equal($('#host a').length, 0);
-    equal($.trim($('#host').text()), 'Third Page Link to second paragraph first object second object');
+    equal(mergeText($('#host')), 'ThirdPageLinktosecondparagraphfirstobjectsecondobjectLinktofourthparagraphRe-enablefourthparagraphenableDisabledlinkSecondparagraphfourthparagraphcontent');
 });

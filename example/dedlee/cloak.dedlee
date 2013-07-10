@@ -60,7 +60,7 @@ p.cloakroom
 p.bar
     {{? !story.cloakPutOn}}
         <p>It's pitch black here. You can't see a thing. You can see a dim light to the <turn to="foyer">entrace</turn> of the bar</p>
-        <p>You can try moving around to the ((movingInTheDark"))northeast(()), ((movingInTheDark"))east(()), ((movingInTheDark"))southeast(()), ((movingInTheDark"))south(()), ((movingInTheDark"))southwest(()), ((movingInTheDark"))west(()) or ((movingInTheDark"))northwest(())</p>
+        <p>You can try moving around to the ((movingInTheDark))northeast(()), ((movingInTheDark))east(()), ((movingInTheDark))southeast(()), ((movingInTheDark))south(()), ((movingInTheDark))southwest(()), ((movingInTheDark))west(()) or ((movingInTheDark))northwest(())</p>
     {{??}}
         {{? story.cloakJustPutOn }}
             <p>The cloak seems to absorb the darkness and you can gradually see the room.</p>

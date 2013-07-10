@@ -357,6 +357,8 @@ var Dedalus,
             getNumParagraphsShown        : this.getNumParagraphsShown.bind(this),
             getNumParagraphsShownInPage  : this.getNumParagraphsShownInPage.bind(this),
             turnTo                       : this.turnTo.bind(this),
+            disable                      : this.disable.bind(this),
+            enable                       : this.enable.bind(this),
             showParagraph                : this.showParagraph.bind(this),
             endGame                      : this.endGame.bind(this)
         };
@@ -747,35 +749,35 @@ var Dedalus,
      * @param  {doT}  content  dotT template function whose result must be displayed
      * @param  {Bool} turnPage Whether to turn page before the display. Defaults to false
      */
-    Dedalus.prototype.executePrinting      = function (content, turnPage) {};
+    Dedalus.prototype.executePrinting = function (content, turnPage) {};
 
     /**
      * Implementation-specific undo action
      */
-    Dedalus.prototype.executeUndo          = function () {};
+    Dedalus.prototype.executeUndo = function () {};
 
     /**
      * Implementation-specific save action
      * @param  {JSON} story    Dedalus story object to save
      * @param  {JSON} _story   Dedalus _story object to save
      */
-    Dedalus.prototype.executeSave          = function (story, _story) {};
+    Dedalus.prototype.executeSave = function (story, _story) {};
 
     /**
      * Check if there is any save state available
      * @return {Bool} Whether there is any saved state available
      */
-    Dedalus.prototype.saveAvailable        = function () {};
+    Dedalus.prototype.saveAvailable = function () {};
 
     /**
      * Implementation-specific restore action
      */
-    Dedalus.prototype.executeRestore       = function () {};
+    Dedalus.prototype.executeRestore = function () {};
 
     /**
      * Implementation-specific reset action
      */
-    Dedalus.prototype.executeReset         = function () {};
+    Dedalus.prototype.executeReset = function () {};
 
     /**
      * Return restored data
@@ -783,18 +785,32 @@ var Dedalus,
      *                 Dedauls story object, and the second is Dedalus _story:
      *                 [story, _story]
      */
-    Dedalus.prototype.getRestoreData       = function () {};
+    Dedalus.prototype.getRestoreData = function () {};
 
     /**
      * Implementation specific action executed after the freezing of a state for
      * undoing purposes
      */
-    Dedalus.prototype.afterUndoSave        = function () {};
+    Dedalus.prototype.afterUndoSave = function () {};
+
+    /**
+     * Implementation specific method to convert an interactive element (such as
+     * "turn to" or "interact with") into a normal text. The process can be
+     * restored by Dedalus.prototype.enable()
+     * @param  {jQUery} element Link to be disabled
+     */
+    Dedalus.prototype.disable = function (element) {};
+
+    /**
+     * Implementation specific method to revert a previously disabled interactive
+     * element (see Dedalus.prototype.enable())
+     */
+    Dedalus.prototype.enable = function () {};
 
     /**
      * Implementation specific action executed when the story comes to an end
      */
-    Dedalus.prototype.endGame              = function () {};
+    Dedalus.prototype.endGame = function () {};
 
     /**
      * Get the content of a given jQuery element and returns is "as is", without

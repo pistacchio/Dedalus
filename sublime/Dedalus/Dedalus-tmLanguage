@@ -12,7 +12,7 @@
         },
        "end": "^\\s*$",
        "endCaptures": {},
-       "name": "dedlee.blocks",
+       "name": "meta.function.dedlee",
         "patterns": [
             {"include": "source.js"},
             {
@@ -38,7 +38,7 @@
                "name": "entity.name.tag.other.html"
             }
         },
-       "name": "dedlee.links",
+       "name": "meta.function.dedlee",
         "patterns": [
             {"include": "source.js"},
             {
@@ -60,7 +60,7 @@
         },
        "end": "$",
        "endCaptures": {},
-       "name": "dedlee.when",
+       "name": "meta.function.dedlee",
         "patterns": [
             {"include": "source.js"},
             {
@@ -88,7 +88,8 @@
         },
         "comment": "Object with inventory name",
         "match": "\\b(o\\.)(.*)(\\s+\".*\")",
-        "name": "dedlee.objects.actions"
+
+        "name": "meta.function.dedlee"
     },
     {
         "captures": {
@@ -99,9 +100,9 @@
                 "name": "entity.name.function",
             }
         },
-        "comment": "Object",
-        "match": "\\b(o\\.)(.*)",
-        "name": "dedlee.objects"
+        "comment": "Objects and Characters",
+        "match": "\\b(o\\.|c\\.)(.*)",
+        "name": "meta.function.dedlee"
     },
     {
         "captures": {
@@ -116,9 +117,9 @@
                 "name": "variable.parameter.function"
             }
         },
-        "comment": "Page (first)",
+        "comment": "Page (first",
         "match": "\\b(p\\.)(.*)(\\s+\\(first\\))",
-        "name": "dedlee.page.first"
+        "name": "meta.function.dedlee"
     },
     {
         "captures": {
@@ -131,7 +132,7 @@
         },
         "comment": "Page, paragraph, initscript and before/after actions",
         "match": "\\b(p\\.|pg\\.)(.*)",
-        "name": "dedlee.other.elements"
+        "name": "meta.function.dedlee"
     },
     {
         "captures": {

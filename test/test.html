@@ -121,15 +121,35 @@
 
             <interact with="secondObject">second object</interact>
 
+            Link to <show paragraph="fourthParagraph" id="disableable">fourth paragraph</show>
+
+            Re-enable <show paragraph="fifthParagraph">fourth paragraph enable</show>
+
+            <show paragraph="sixthParagraph" id="disabledDisableable" class="disabled">Disabled link</show>
+
             <paragraph id="secondParagraph">
                 Second paragraph
+                {{ story.disable('disableable'); }}
             </paragraph>
+
+            <paragraph id="fourthParagraph">
+                fourth paragraph content
+            </paragraph>
+
+            <paragraph id="sixthParagraph">
+                sixth paragraph content
+            </paragraph>
+
+            <paragraph id="fifthParagraph">
+                {{ story.enable('disableable'); }}
+            </paragraph>
+
         </page>
 
         <page id="fourthPage">
             Fourth Page
             Back to <turn to="thirdPage">third page</turn>
-            Talk to a <interact with="firstCharacter">character</interact>
+            Talk to a <interact with="firstCharacter" id="characterId">character</interact>
         </page>
 
         <paragraph id="thirdParagraph">

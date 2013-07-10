@@ -96,10 +96,13 @@ var DedalusWeb;
          */
         function handle (element, attrib, fn) {
             self.domTarget.find(element).each(function () {
-                var self   = $(this),
-                    target = self.attr(attrib),
-                    text   = self.text(),
-                    link   = $('<a href="#">' + text + '</a>');
+                var elem       = $(this),
+                    target     = elem.attr(attrib),
+                    originalId = elem.attr('id'),
+                    elemId     = originalId ? 'data-id="' + elem.attr('id') + '"' : '',
+                    isDisabled = elem.hasClass('disabled'),
+                    text       = elem.text(),
+                    link       = $('<a href="#" ' + elemId + '>' + text + '</a>');
 
                 link.on('click', function (e) {
                     fn(target, e);
@@ -107,8 +110,14 @@ var DedalusWeb;
                     return false;
                 });
 
-                self.after(link);
-                self.remove();
+                elem.after(link);
+                elem.remove();
+
+                // Actually disable a pre-desabled link (has class="disabled"). Must have an id
+                if (isDisabled) {
+                    self.disable(originalId);
+                }
+
             });
         }
 
@@ -253,7 +262,6 @@ var DedalusWeb;
         localStorage._story = JSON.stringify(_story);
     };
 
-
     DedalusWeb.prototype.saveAvailable = function () {
         return localStorage.story && localStorage._story;
     };
@@ -275,6 +283,38 @@ var DedalusWeb;
         this.executeInitialization();
 
         this.interactionTarget.hide();
+    };
+
+    DedalusWeb.prototype.disable = function (id) {
+        // Subsitute the matched <a> with a <span> remembering the click function
+        var element = this.domTarget.find('a[data-id="' + id + '"]'),
+            elementDom,
+            spanElement,
+            originalClickFn;
+
+        if (element.length > 0) {
+            elementDom      = element.get(0),
+            spanElement     = '<span data-id="' + id + '">' + element.text() + '</span>',
+
+            // Trick to get the current click event
+            // http://stackoverflow.com/questions/2518421/jquery-find-events-handlers-registered-with-an-object
+            originalClickFn = $._data(elementDom, 'events').click[0].handler;
+
+            // Make the <a> a <span>
+            element.after($(spanElement).data('originalClickFn', originalClickFn));
+            element.remove();
+        }
+    };
+
+    DedalusWeb.prototype.enable = function (id) {
+        // Subsitute the matched <span> with a <a> restoring the click function
+        var element         = this.domTarget.find('span[data-id="' + id + '"]'),
+            aElement        = '<a href="#" data-id="' + id + '">' + element.text() + '</a>',
+            originalClickFn = element.data('originalClickFn');
+
+        // Restore original click function
+        element.after($(aElement).on('click', originalClickFn));
+        element.remove();
     };
 
     DedalusWeb.prototype.endGame = function () {
