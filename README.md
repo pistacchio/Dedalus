@@ -29,6 +29,7 @@ You may want to read about the [tecnical details](#technicalDetails) or just kee
     *  [Disabling links](#disablingLinks)
     *  [Counters](#counters)
     *  [Managing large projects](#managingLargeProjects)
+    *  [Further customization](#furtherCustomization)
     *  [Utility functions recap and good luck](#utilityFunctionsRecapAndGoodLuck)
 *  [Dedlee](#dedlee)
     * [Syntax](#dedleeSyntax)
@@ -95,6 +96,7 @@ The DedalusWeb constructor needs the following options to be set, each of which 
 | restoreTarget     | an element that, when clicked, restores the story to the last saved point                                                                                                                                                                                              |
 | restartTarget     | an element that, when clicked, restarts the story from the beginning                                                                                                                                                                                                   |
 | undoStageTarget   | this is a hidden div used internally by the system to store undo informations                                                                                                                                                                                          |
+| onPrint           | optional, see [Further customization](#furtherCustomization)                                                                                                                                                                                                           |
 
 <a name="writingYourStory"></a>
 
@@ -542,6 +544,49 @@ function makeWeapons () {
     makeBeetlegeuseDesperationMazeEvents();
     [..]
 </initscript>
+```
+
+<a name="furtherCustomization"></a>
+
+### Further customization
+
+**<span style="color:#780000">Warning: Advanced topic</span>**
+
+As already stressed multiple times, having control on the HTML structure and CSS of your story allows you to tailor how the novel looks like and you can strenghten the communicative power of your text dressing it with an appropriate robe.
+
+Another point of customization (maybe for more advanced users) is the abilty to change how the text appears. If you've tried the sample story Cloak of Darkness or already made some experimentation with Dedalus by yourself, you may have noticed how a "page turn" clears the current page and fills it with the new content. In case of a paragraph, it just gets appends to the current text being shown.
+
+You might want to change this default behavior to make it prettier or more appropriate for your story.
+
+The options dictonary that is passed to DedalusWeb to initialize it contains a `onPrint` parameter. It is optional, but can be overwritten.
+
+`onPrint` must be a function that returns true or false and accepts two arguments: `content` and `turn`.
+
+* `content`: The text about to be printed (a new page, a paragraph, the result of clicking on an action...)
+* `turn`: A boolean value telling if `content` is about to added to the displayed text (*false*) or if this is a new page taking the place of what's being shown (*true*)
+* `return`: A boolean value telling Dedalus if, after your custom `onPrint` function, it should execute the printing like it would do (*true*) or if your function completely overwrites the default (*false*)
+
+Two example functions are provided that can serve as a model if you want to come up with your own display function.
+
+* `src/html/plugins/fade.js`: Makes new text appear with a nice fade-in effect
+* `src/html/plugins/no-turn.js`: Whatever the value of `turn`, it never hides the content of the page but keeps adding to it
+
+To use them, just include the script in the page
+
+``` html
+<head>
+    <script src="fade.js"></script>
+    [..]
+```
+
+and set the `onPrint` option
+
+``` javascript
+    $(function () {
+        new DedalusWeb({
+            onPrint : onPrintFade,
+            [..]
+
 ```
 
 <a name="utilityFunctionsRecapAndGoodLuck"></a>

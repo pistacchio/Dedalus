@@ -1,5 +1,5 @@
 /**
- * dedalus-web.js v0.9.3
+ * dedalus-web.js v0.9.4
  * 2013, Gustavo Di Pietro
  * Licensed under the GPL license (http://www.gnu.org/licenses/gpl-2.0.html)
 **/
@@ -56,6 +56,7 @@ var DedalusWeb;
         this.resetTarget       = options.resetTarget;
         this.undoStageTarget   = options.undoStageTarget;
         this.domTargetParent   = options.domTargetParent;
+        this.onPrint           = options.onPrint ? options.onPrint.bind(this) : this.onPrint;
 
         // Set the utility buttons functionality
         this.undoTarget.on('click', this.undo.bind(this));
@@ -69,12 +70,14 @@ var DedalusWeb;
         // Set the story to its initial state
         this.executeReset();
 
-        // subscribe to inventory changes
+        // Subscribe to inventory changes
         this.messageCenter.subscribe('inventory', 'dedalusWeb', this.updateInventory.bind(this));
 
+        // Make the interaction menu desappear on body click
         $('body, html').on('click', function () {
             self.interactionTarget.hide();
         });
+
     };
 
     DedalusWeb.prototype = new Dedalus();
@@ -233,9 +236,13 @@ var DedalusWeb;
             wrappedContent  = '<p>' + content() + '</p>';
 
         if (!isTurn) {
-            this.domTarget.append(wrappedContent);
+            if (this.onPrint(wrappedContent, false)) {
+                this.domTarget.append(wrappedContent);
+            }
         } else {
-            this.domTarget.html(wrappedContent);
+            if (this.onPrint(wrappedContent, true)) {
+                this.domTarget.html(wrappedContent);
+            }
         }
 
         this.handleInteractions();
@@ -321,6 +328,10 @@ var DedalusWeb;
         // Disable all the links available in domTarget and inventoryTarget
         this.domTarget.find('a').off('click').contents().unwrap();
         this.inventoryTarget.find('a').off('click').contents().unwrap();
+    };
+
+    DedalusWeb.prototype.onPrint = function (content, turn) {
+        return true;
     };
 
 }());
