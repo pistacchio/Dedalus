@@ -52,7 +52,7 @@
             </action>
 
             <action id="Put On">
-                <when>story.isInInventory('cloak')</when>
+                <when>story.isInInventory('cloak') && !story.cloakPutOn</when>
                 {{ story.cloakPutOn = true; }}
                 {{? story.currentPageIs('bar')}}
                     {{story.cloakJustPutOn = true;}}

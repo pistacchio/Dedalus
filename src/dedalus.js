@@ -193,8 +193,7 @@ var Dedalus,
                 obj.find('action').each(function () {
                     var whenCheck    = function () { return true; },
                         action       = $(this),
-                        when         = action.find('when').html();
-
+                        when         = action.find('when').text() || undefined;
 
                     if (when !== undefined) {
                         whenCheck = function () { return eval(when); };

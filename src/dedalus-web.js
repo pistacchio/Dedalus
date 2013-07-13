@@ -151,9 +151,10 @@ var DedalusWeb;
     DedalusWeb.prototype.interactWith = function (target, e) {
         var action,
             content, link,
-            self    = this,
-            object  = this.getObject(target),
-            actions = object.getActiveActions();
+            self           = this,
+            object         = this.getObject(target),
+            actions        = object.getActiveActions(),
+            clickedElement = $(e.target);
 
         this.interactionTarget.html('<ul></ul>');
 
@@ -184,8 +185,8 @@ var DedalusWeb;
 
                 // Position teh interaction host element under the clicked link
                 // and centered to it
-                this.interactionTarget.css('left', e.pageX - (this.interactionTarget.width() / 2));
-                this.interactionTarget.css('top',  e.pageY + 10);
+                this.interactionTarget.css('left', clickedElement.offset().left - (this.interactionTarget.width() / 2) + (clickedElement.width() / 2));
+                this.interactionTarget.css('top',  clickedElement.offset().top + 20);
 
                 this.interactionTarget.show();
             }
