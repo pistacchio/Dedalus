@@ -1,0 +1,126 @@
+html,
+body {
+    font-family    : "Trebuchet MS", Helvetica, sans-serif;
+    font-size      : 16px;
+    color          : #444;
+    margin         : 0;
+    background     : #fff;
+    padding        : 0;
+    height         : 100%;
+    overflow       : hidden;
+}
+a {
+    color           : #7f9696;
+    text-decoration : none;
+}
+p {
+    margin-top    : 25px;
+    margin-bottom : 25px;
+}
+
+#wrapper {
+    width            : 900px;
+    margin-left      : auto;
+    margin-right     : auto;
+    padding-bottom   : 100px;
+    height           : 100%;
+    padding-top      : 30px;
+}
+
+#story {
+    display: none;
+}
+
+#host {
+    margin-top: 100px;
+    width            : 700px;
+}
+
+#title {
+    top              : 30px;
+    left             : 0;
+    padding          : 10px;
+    text-align       : center;
+    position         : absolute;
+    font-size        : 30px;
+    font-weight      : bold;
+    width            : 100%;
+    margin-bottom    : 70px;
+    text-transform   : lowercase;
+}
+
+#interactionHost {
+    position              : absolute;
+    overflow              : auto;
+    padding               : 3px;
+    padding-left          : 5px;
+    margin                : 0;
+    height                : 24px;
+    background            : #ECEBE7;
+    -webkit-border-radius : 5px;
+    -moz-border-radius    : 5px;
+    border-radius         : 5px;
+}
+#interactionHost ul,
+#inventoryHost ul {
+    display : block;
+    margin  : 0;
+    padding : 0;
+}
+#inventoryHost ul {
+    padding-top : 10px;
+    width       : 150px;
+}
+
+#interactionHost li,
+#inventoryHost li {
+    float           : left;
+    margin          : 0;
+    padding         : 0;
+    margin-right    : 10px;
+    list-style-type : none;
+}
+#inventoryHost li {
+    width       : 150px;
+}
+#inventoryHost {
+    overflow: auto;
+}
+#inventoryHostWrapper {
+    width       : 150px;
+    float       : right;
+    left        : 50%;
+    top         : 127px;
+    margin-left : 300px;
+    position    : absolute;
+    text-align  : right;
+    border-left : 1px solid #999;
+}
+#inventoryHostWrapper h2 {
+    color          : #596969;
+    font-size      : 18px;
+    width          : 150px;
+    text-align     : right;
+    margin         : 0;
+    padding-bottom : 10px;
+    text-transform : lowercase;
+}
+
+#footer {
+    top           : 10px;
+    left          : 50%;
+    margin-left   : -450px;
+    font-size     : 12px;
+    position      : absolute;
+    right         : 20px;
+    border-bottom : 1px solid #999;
+    width         : 900px;
+    text-align    : right;
+}
+#footer a {
+    border: 0;
+    color: rgb(167, 197, 197);
+}
+#undoStageHost {
+    display: none;
+}

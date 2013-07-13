@@ -1,7 +1,7 @@
 /**
- * dedalus.js v0.9
+ * dedalus.js v0.9.3
  * 2013, Gustavo Di Pietro
- * Licensed under the MIT license (http://opensource.org/licenses/MIT)
+ * Licensed under the GPL license (http://www.gnu.org/licenses/gpl-2.0.html)
 **/
 
 
@@ -16,6 +16,12 @@
  *     doT.js: http://olado.github.io/doT/index.html
  */
 
+/* ** STRING EXTENSIONS ** */
+if (!String.prototype.trim) String.prototype.trim             = function () { return this.replace(/^\s+|\s+$/g, ''); };
+if (!String.prototype.ltrim) String.prototype.ltrim           = function () { return this.replace(/^\s+/,''); };
+if (!String.prototype.rtrim) String.prototype.rtrim           = function () { return this.replace(/\s+$/,''); };
+if (!String.prototype.startsWith) String.prototype.startsWith = function (str) { return this.lastIndexOf(str, 0) === 0; };
+
 var Dedalus,
     story;
 
@@ -24,17 +30,16 @@ var Dedalus,
     /*jslint evil: true, white: true, nomen: true */
     /*global $, jQuery, doT*/
 
-    // Forward declaration of utilty functions
-    var makeMessageCenter,
-        getRawContent;
-
     /**
      * Base class Dedalus
      * @param  {JSON} options A dictionary of configuration options:
      *                              {
-     *                                  domSource: A jQuery object with the root
-     *                                             element containing the story
-     *                                             source
+     *                                  domSource:    A jQuery object with the root
+     *                                                element containing the story
+     *                                                source
+     *                                  dedleeSource: If this jQuery element is set,
+     *                                                assume that the story is in dadlee
+     *                                                format and hosted in this element
      *                              }
      * @return                      A Dedalus instance
      */
@@ -42,7 +47,14 @@ var Dedalus,
         // Ignore parsing the story source if called as prototype constructor by
         // a class inheriting from this
         this.options       = options;
-        this._story        = options ? this.parseStory(this.options.domSource) : {};
+        if (this.options) {
+            this.dedleeSource  = this.options.dedleeSource;
+            this.domSource     = this.options.domSource;
+            this._story        = this.options ? this.parseStory() : {};
+        }
+
+        // Make sure that story is not undefined
+        this._story || (this._story = {});
 
         // Variables to store previous running states to be restored by undo
         // actions
@@ -60,12 +72,13 @@ var Dedalus,
      * Parse the story file passed by domSource
      * @param  {jQuery} domSource A jQuery object with the root element
      *                            containing the story source
+     *
      * @return {JSON}             An object containing all the information
      *                            about the story. This is different from the global
      *                            story variable since its contains more infos that
      *                            are not shared outside the class
      */
-    Dedalus.prototype.parseStory = function (domSource) {
+    Dedalus.prototype.parseStory = function () {
         var _story = {
                 currentPage               : '',
                 title                     : '',
@@ -191,7 +204,7 @@ var Dedalus,
 
                     objects[id].actions[action.attr('id')] = {
                         when             : whenCheck,
-                        content          : doT.template(getRawContent(action))
+                        content          : doT.template(Dedalus.getRawContent(action))
                     };
                 });
 
@@ -220,7 +233,7 @@ var Dedalus,
                     id        = paragraph.attr('id');
 
                 paragraphs[id] = {
-                    content: doT.template(getRawContent(paragraph))
+                    content: doT.template(Dedalus.getRawContent(paragraph))
                 };
             });
             return paragraphs;
@@ -257,7 +270,7 @@ var Dedalus,
                     isFirst    : page.hasClass('first')
                 };
                 page.find('obj, paragraph, character').remove();
-                pages[id].content = doT.template(getRawContent(page));
+                pages[id].content = doT.template(Dedalus.getRawContent(page));
 
             });
             return pages;
@@ -301,24 +314,30 @@ var Dedalus,
             _story.afterEveryParagraphShown  = parent.find('afterEveryParagraphShown').text();
         }
 
+        // If the story is in dadlee format, first convert it into the normal
+        // HTML-like format
+        if (this.dedleeSource) {
+            this.parseDedlee(this.dedleeSource, this.domSource);
+        }
+
         // Make a temporary copy of domSource so that the destructive process
         // of parsing it can be restored
-        temporaryDomSourceCopy = domSource.children().clone(true);
+        temporaryDomSourceCopy = this.domSource.children().clone(true);
+
 
         // Prepare _story and returns it
-        _story.currentPage    = getInitialCurrentPage(domSource);
-        _story.initialization = getInitScript(domSource);
-        _story.intro          = getIntroLocal(domSource);
-        _story.inventory      = getInitialInventory(domSource);
-        _story.objects        = getObjects(domSource);
-        _story.pages          = getPages(domSource);
-        _story.paragraphs     = getParagraphs(domSource);
-        _story.title          = getTitleLocal(domSource);
-        setBeforeAfterActions(domSource);
+        _story.currentPage    = getInitialCurrentPage(this.domSource);
+        _story.initialization = getInitScript(this.domSource);
+        _story.intro          = getIntroLocal(this.domSource);
+        _story.inventory      = getInitialInventory(this.domSource);
+        _story.objects        = getObjects(this.domSource);
+        _story.pages          = getPages(this.domSource);
+        _story.paragraphs     = getParagraphs(this.domSource);
+        _story.title          = getTitleLocal(this.domSource);
+        setBeforeAfterActions(this.domSource);
 
         // Restore untouched domSource
-        domSource.html('').append(temporaryDomSourceCopy);
-
+        this.domSource.html('').append(temporaryDomSourceCopy);
         return _story;
     };
 
@@ -338,6 +357,8 @@ var Dedalus,
             getNumParagraphsShown        : this.getNumParagraphsShown.bind(this),
             getNumParagraphsShownInPage  : this.getNumParagraphsShownInPage.bind(this),
             turnTo                       : this.turnTo.bind(this),
+            disable                      : this.disable.bind(this),
+            enable                       : this.enable.bind(this),
             showParagraph                : this.showParagraph.bind(this),
             endGame                      : this.endGame.bind(this)
         };
@@ -728,35 +749,35 @@ var Dedalus,
      * @param  {doT}  content  dotT template function whose result must be displayed
      * @param  {Bool} turnPage Whether to turn page before the display. Defaults to false
      */
-    Dedalus.prototype.executePrinting      = function (content, turnPage) {};
+    Dedalus.prototype.executePrinting = function (content, turnPage) {};
 
     /**
      * Implementation-specific undo action
      */
-    Dedalus.prototype.executeUndo          = function () {};
+    Dedalus.prototype.executeUndo = function () {};
 
     /**
      * Implementation-specific save action
      * @param  {JSON} story    Dedalus story object to save
      * @param  {JSON} _story   Dedalus _story object to save
      */
-    Dedalus.prototype.executeSave          = function (story, _story) {};
+    Dedalus.prototype.executeSave = function (story, _story) {};
 
     /**
      * Check if there is any save state available
      * @return {Bool} Whether there is any saved state available
      */
-    Dedalus.prototype.saveAvailable        = function () {};
+    Dedalus.prototype.saveAvailable = function () {};
 
     /**
      * Implementation-specific restore action
      */
-    Dedalus.prototype.executeRestore       = function () {};
+    Dedalus.prototype.executeRestore = function () {};
 
     /**
      * Implementation-specific reset action
      */
-    Dedalus.prototype.executeReset         = function () {};
+    Dedalus.prototype.executeReset = function () {};
 
     /**
      * Return restored data
@@ -764,21 +785,53 @@ var Dedalus,
      *                 Dedauls story object, and the second is Dedalus _story:
      *                 [story, _story]
      */
-    Dedalus.prototype.getRestoreData       = function () {};
+    Dedalus.prototype.getRestoreData = function () {};
 
     /**
      * Implementation specific action executed after the freezing of a state for
      * undoing purposes
      */
-    Dedalus.prototype.afterUndoSave        = function () {};
+    Dedalus.prototype.afterUndoSave = function () {};
+
+    /**
+     * Implementation specific method to convert an interactive element (such as
+     * "turn to" or "interact with") into a normal text. The process can be
+     * restored by Dedalus.prototype.enable()
+     * @param  {jQUery} element Link to be disabled
+     */
+    Dedalus.prototype.disable = function (element) {};
+
+    /**
+     * Implementation specific method to revert a previously disabled interactive
+     * element (see Dedalus.prototype.enable())
+     */
+    Dedalus.prototype.enable = function () {};
 
     /**
      * Implementation specific action executed when the story comes to an end
      */
-    Dedalus.prototype.endGame              = function () {};
+    Dedalus.prototype.endGame = function () {};
 
+    /**
+     * Get the content of a given jQuery element and returns is "as is", without
+     * any encoding that may occur with the use of .html() or .text()
+     * @param  {jQuery} element jQuery element whose content has to be returned as
+     *                          string
+     * @return {String}         String with the raw content of element
+     */
+    Dedalus.getRawContent = function (element) {
+        var contents = element.contents(),
+            out      = '';
+
+        contents.each(function () {
+            out += this.nodeType === 3 ? this.nodeValue : this.outerHTML;
+        });
+
+        return out;
+    };
 
     /* ** UTILTY FUNCTIONS ** */
+
 
     /**
      * Generate a message dispatcher that implements the Publish/Subscribe pattern
@@ -789,7 +842,7 @@ var Dedalus,
      *                    unsubscribe : Function to unsubscribe to the message center
      *                }
      */
-    makeMessageCenter = function () {
+    function makeMessageCenter () {
         // A dictionary of channel objects:
         //      {
         //          'Channel name': {
@@ -849,24 +902,6 @@ var Dedalus,
             subscribe   : subscribe,
             unsubscribe : unsubscribe
         };
-    };
-
-    /**
-     * Get the content of a given jQuery element and returns is "as is", without
-     * any encoding that may occur with the use of .html() or .text()
-     * @param  {jQuery} element jQuery element whose content has to be returned as
-     *                          string
-     * @return {String}         String with the raw content of element
-     */
-    getRawContent = function (element) {
-        var contents = element.contents(),
-            out      = '';
-
-        contents.each(function () {
-            out += this.nodeType === 3 ? this.nodeValue : this.outerHTML;
-        });
-
-        return out;
-    };
+    }
 
 }());

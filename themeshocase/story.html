@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DedalusWeb Story</title>
+
+    <script src="http://olado.github.io/doT/doT.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+    <script src="../dedalus.js"></script>
+    <script src="../dedalus-web.js"></script>
+
+    <link rel="stylesheet" href="themes/plain/story.css">
+
+    <script>
+        $(function () {
+            var theme,
+                themes = {
+                'Ally Ann'    : 'allyann',
+                'Copycat'     : 'copycat',
+                'Fantasty'    : 'fantasty',
+                'Lil candy'   : 'lilcandy',
+                'Modern'      : 'modern',
+                '*nix'        : 'nix',
+                'Plain'       : 'plain',
+                "R'lyeh"      : 'rlyeh',
+                'Scriptorium' : 'scriptorium',
+                'The writer'  : 'thewriter'
+            },
+            themeList   = Object.keys(themes),
+            randomTheme = themes[themeList[Math.round(Math.random() * themeList.length)]],
+            select      = $('#theme');
+
+            function changeTheme (theme) {
+                $('head link').attr('href', 'themes/' + theme + '/story.css');
+            }
+
+            for (theme in themes) {
+                select.append('<option value="' + themes[theme] + '">' + theme + '</option>');
+            };
+
+            changeTheme(randomTheme);
+            select.find('option[value="' + randomTheme + '"]').attr('selected', 'selected');
+
+            select.on('change', function () {
+                changeTheme(select.find('option:selected').val());
+            });
+        });
+    </script>
+
+    <style>
+        #selector {
+            position : fixed;
+            top      : 20px;
+            right    : 20px;
+        }
+    </style>
+
+ </head>
+<body>
+    <div id="story">
+
+        <initscript>
+        </initscript>
+
+        <beforeEveryThing>
+        </beforeEveryThing>
+
+        <beforeEveryPageTurn>
+        </beforeEveryPageTurn>
+
+        <beforeEveryParagraphShown>
+        </beforeEveryParagraphShown>
+
+        <afterEveryThing>
+        </afterEveryThing>
+
+        <afterEveryPageTurn>
+        </afterEveryPageTurn>
+
+        <afterEveryParagraphShown>
+        </afterEveryParagraphShown>
+
+        <!-- Novel -->
+        <title>Empty story</title>
+
+        <!-- Objects -->
+        <obj id="dummyObject" inventoryName="An object">
+            <action id="Examine">
+                Something happens... who knows what?!
+            </action>
+
+            <action id="Get">
+                <when>!story.isInInventory('dummyObject')</when>
+                As you try to get it... It is clear that the inventory works!
+                {{ story.putInInventory('dummyObject'); }}
+            </action>
+
+        </obj>
+
+        <!-- Pages -->
+        <page id="intro">
+            You are about to experience the most amazing empty story ever...
+        </page>
+
+        <page id="dummyPage" class="first">
+            You are in an empty page except for a <show paragraph="dummyParagraph">paragraph</show>.
+
+            <p>Quite unsurprisingly, there is even an <interact with="dummyObject">object</interact> lying around.</p>
+
+            <p>Looking around with more attention, you notice <turn to="otherPage">another page</turn></p>
+
+            <paragraph id="dummyParagraph">
+                Seiously, What did you expect?
+            </paragraph>
+        </page>
+
+        <page id="otherPage">
+            Plot twist! The story ends abruptly.
+            {{ story.endGame(); }}
+        </page>
+
+    </div>
+
+    <div id="wrapper">
+        <div id="title"></div>
+
+        <div id="inventoryHostWrapper">
+            <h2>Inventory</h2>
+            <div id="inventoryHost"></div>
+        </div>
+
+        <div id="host"></div>
+    </div>
+
+    <div id="interactionHost"></div>
+
+    <div id="undoStageHost"></div>
+
+    <div id="footer">
+        <a id="undoHost" href="#">Undo</a> &bull; <a id="saveHost" href="#">Save</a> &bull; <a id="restoreHost" href="#">Restore</a> &bull; <a id="resetHost" href="#">Reset</a>
+    </div>
+
+    <div id="selector">
+        <select id="theme"></select>
+    </div>
+
+    <script>
+        $(function () {
+            new DedalusWeb({
+                domSource         : $('#story'),
+                domTarget         : $('#host'),
+                titleTarget       : $('#title'),
+                inventoryTarget   : $('#inventoryHost'),
+                interactionTarget : $('#interactionHost'),
+                undoTarget        : $('#undoHost'),
+                undoStageTarget   : $('#undoStageHost'),
+                saveTarget        : $('#saveHost'),
+                restoreTarget     : $('#restoreHost'),
+                resetTarget       : $('#resetHost'),
+            });
+        });
+
+    </script>
+</body>
+</html>

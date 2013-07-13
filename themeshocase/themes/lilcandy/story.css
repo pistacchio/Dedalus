@@ -1,0 +1,108 @@
+html,
+body {
+    font-family      : "Times New Roman", Times, serif;
+    font-size        : 16px;
+    color            : #404040;
+    background-color : #FCF2F2;
+    background-image: url(background.png);
+    background-repeat: repeat;
+    margin           : 0;
+    padding          : 0;
+    height           : 100%;
+    overflow         : hidden;
+}
+a {
+    color           : #580000;
+    text-decoration : none;
+    border-bottom   : 1px dotted #580000;
+}
+p {
+    margin-top    : 15px;
+    margin-bottom : 15px;
+}
+
+#wrapper {
+    width            : 1000px;
+    background-color : #F8F8F8;
+    margin-left      : auto;
+    margin-right     : auto;
+    padding-bottom   : 100px;
+    height           : 100%;
+    padding-top      : 30px;
+}
+
+#story {
+    display: none;
+}
+
+#host {
+    width            : 500px;
+    margin-left      : auto;
+    margin-right     : auto;
+}
+
+#title {
+    font-size     : 24px;
+    font-weight   : bold;
+    color         : #580000;
+    margin-bottom : 10px;
+    width         : 500px;
+    margin-left   : auto;
+    margin-right  : auto;
+    text-align    : center;
+}
+
+#interactionHost {
+    position            : absolute;
+    overflow            : auto;
+    margin              : 0;
+    padding             : 5px;
+    padding-top         : 15px;
+    background-image    : url(interaction-border.png), url(interaction-border.png), url(interaction.png);
+    background-repeat   : no-repeat;
+    background-position : left center, right center, center top;
+    border-bottom       : none;
+    height              : 24px;
+}
+#interactionHost ul,
+#inventoryHost ul {
+    display : block;
+    margin  : 0;
+    padding : 0;
+}
+#interactionHost li,
+#inventoryHost li {
+    float           : left;
+    margin          : 0;
+    padding         : 0;
+    margin-right    : 10px;
+    list-style-type : none;
+}
+
+#inventoryHost {
+    overflow: auto;
+}
+#inventoryHostWrapper {
+    width       : 150px;
+    float       : left;
+    margin-left : 50%;
+    left        : -450px;
+    position    : absolute;
+}
+#inventoryHostWrapper h2 {
+    color      : #580000;
+    font-size  : 18px;
+    width      : 150px;
+    text-align : center;
+    margin     : 0;
+}
+
+#footer {
+    bottom    : 10px;
+    font-size : 12px;
+    position  : fixed;
+    right     : 20px;
+}
+#undoStageHost {
+    display: none;
+}

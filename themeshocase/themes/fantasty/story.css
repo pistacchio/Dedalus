@@ -1,0 +1,150 @@
+html,
+body {
+    font-family      : Georgia, serif;
+    font-size        : 16px;
+    color            : #474414;
+    background-image: url(background.gif);
+    background-repeat: repeat;
+    margin           : 0;
+    padding          : 0;
+    height           : 100%;
+    overflow         : hidden;
+}
+a {
+    color           : #580000;
+    text-decoration : none;
+}
+p {
+    margin-top    : 15px;
+    margin-bottom : 15px;
+}
+
+#wrapper {
+    width            : 702px;
+    margin-left      : auto;
+    margin-right     : auto;
+    height           : 100%;
+}
+
+#story {
+    display: none;
+}
+
+#host {
+    width            : 702px;
+    height           : 1004px;
+    background-image : url(scroll.png);
+    margin-left      : auto;
+    margin-right     : auto;
+    padding-top: 240px;
+    padding-left: 80px;
+}
+
+#title {
+    position         : absolute;
+    font-size        : 0;
+    font-weight      : bold;
+    color            : #580000;
+    width            : 430px;
+    height           : 106px;
+    background-image : url(title.png);
+    margin-left      : 180px;
+    margin-top       : 120px;
+}
+
+#interactionHost {
+    position            : absolute;
+    overflow            : auto;
+    margin              : 0;
+    padding             : 5px;
+    padding-top         : 15px;
+    background-image    : url(interaction.png);
+    background-repeat   : no-repeat;
+    background-position : center top;
+    border-bottom       : none;
+    height              : 24px;
+}
+#interactionHost ul,
+#inventoryHost ul {
+    display : block;
+    margin  : 0;
+    padding : 0;
+}
+#interactionHost li,
+#inventoryHost li {
+    float           : left;
+    margin          : 0;
+    padding         : 0;
+    margin-right    : 10px;
+    list-style-type : none;
+}
+#interactionHost li a,
+#inventoryHost li a {
+    color : #bb9f3d;
+}
+#inventoryHost li a {
+    margin-left: 40px;
+    margin-top: 10px;
+}
+#inventoryHost {
+    overflow         : auto;
+    position         : absolute;
+}
+#inventoryHostWrapper {
+    width            : 218px;
+    height           : 212px;
+    color            : #bb9f3d;
+    left             : 50%;
+    margin-left      : -580px;
+    top              : 100px;
+    position         : absolute;
+    background-image : url(small-scroll-2.png);
+}
+#inventoryHostWrapper h2 {
+    padding-top: 10px;
+    font-size  : 18px;
+    width      : 218px;
+    text-align : center;
+    margin     : 0;
+}
+
+#footer {
+    width            : 218px;
+    height           : 212px;
+    font-size        : 0px;
+    top              : 100px;
+    left             : 50%;
+    margin-left      : 420px;
+    position         : fixed;
+    background-image : url(small-scroll.png);
+}
+#footer a {
+    text-decoration     : none;
+    border              : 0;
+    color               : #bb9f3d;
+    font-weight         : bold;
+    font-size           : 20px;
+    position            : absolute;
+    background-image    : url(lilium.png);
+    background-repeat   : no-repeat;
+    background-position : left center;
+    height              : 29px;
+    margin-left         : 50px;
+    padding-left        : 25px;
+    text-shadow         : 1px 1px #645521;
+}
+#undoHost {
+    margin-top  : 20px;
+}
+#saveHost {
+    margin-top  : 70px;
+}
+#restoreHost {
+    margin-top  : 120px;
+}
+#resetHost {
+    margin-top  : 170px;
+}
+#undoStageHost {
+    display: none;
+}

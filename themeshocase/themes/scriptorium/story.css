@@ -1,0 +1,165 @@
+@font-face {
+  font-family: 'MedievalSharp';
+  font-style: normal;
+  font-weight: 400;
+  src: local('MedievalSharp'), url(http://themes.googleusercontent.com/static/fonts/medievalsharp/v5/85X_PjV6tftJ0-rX7KYQkEW_NTSs25krVdM7z2wiArQ.woff) format('woff');
+}
+
+html,
+body {
+    font-family      : 'MedievalSharp';
+    font-size        : 19px;
+    color            : #3e3523;
+    margin           : 0;
+    padding          : 0;
+    height           : 100%;
+    overflow         : hidden;
+    background-image: url(background.jpg);
+    -webkit-background-size : cover;
+    -moz-background-size    : cover;
+    -o-background-size      : cover;
+    background-size         : cover;
+}
+a {
+    color: #55220e;
+    text-decoration : none;
+    background-image: url(link.png);
+    background-repeat: no-repeat;
+    background-position: center 15px;
+}
+p {
+    margin-top    : 15px;
+    margin-bottom : 15px;
+}
+
+#wrapper {
+    width          : 1000px;
+    margin-left    : auto;
+    margin-right   : auto;
+    padding-bottom : 100px;
+    height         : 100%;
+    padding-top    : 30px;
+    background-image: url(miniature.png);
+    background-repeat: no-repeat;
+}
+
+#story {
+    display: none;
+}
+
+#host {
+    width            : 500px;
+    margin-left      : auto;
+    margin-right     : auto;
+}
+
+#title {
+    font-size     : 30px;
+    font-weight   : bold;
+    margin-bottom : 10px;
+    width         : 500px;
+    margin-left   : auto;
+    margin-right  : auto;
+    text-align    : center;
+    background-image: url(letter-e.png);
+    background-repeat: no-repeat;
+    height: 40px;
+    background-position: top left;
+    padding-left: 70px;
+    padding-top: 110px;
+}
+#title:first-letter {
+    font-size: 0px;
+}
+
+#interactionHost {
+    position      : absolute;
+    overflow      : auto;
+    margin        : 0;
+    height        : 24px;
+    background-image: url(interaction-bg.png);
+    padding:  10px
+}
+#interactionHost ul,
+#inventoryHost ul {
+    display : block;
+    margin  : 0;
+    padding : 0;
+}
+#interactionHost li,
+#inventoryHost li {
+    float           : left;
+    margin          : 0;
+    padding         : 0;
+    margin-right    : 10px;
+    list-style-type : none;
+}
+#interactionHost li a {
+    color: #fff;
+}
+#inventoryHost li {
+    text-align: center;
+    width: 150px;
+}
+#inventoryHost {
+    overflow: auto;
+}
+#interaction a {
+    color: #fff;
+}
+#inventoryHostWrapper {
+    width       : 150px;
+    float       : left;
+    margin-left : 50%;
+    left        : 300px;
+    position    : absolute;
+}
+#inventoryHostWrapper h2 {
+    font-size     : 18px;
+    width         : 150px;
+    text-align    : center;
+    margin        : 0;
+    margin-bottom : 20px;
+}
+
+#footer {
+    bottom    : 10px;
+    font-size : 0px;
+    position  : fixed;
+    right     : 20px;
+}
+#undoHost {
+    background-image: url(undo.png);
+    width: 20px;
+    height: 150px;
+    position: fixed;
+    bottom: 0;
+    right: 160px;
+}
+#saveHost {
+    background-image: url(save.png);
+    width: 17px;
+    height: 110px;
+    position: fixed;
+    bottom: 0;
+    right: 140px;
+}
+#restoreHost {
+    background-image: url(restore.png);
+    width: 50px;
+    height: 140px;
+    position: fixed;
+    bottom: 0;
+    right: 100px;
+}
+#resetHost {
+    background-image: url(restart.png);
+    width: 30px;
+    height: 130px;
+    position: fixed;
+    bottom: 0;
+    right: 70px;
+}
+#undoStageHost {
+    display: none;
+}
