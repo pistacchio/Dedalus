@@ -14,6 +14,7 @@ You may want to read about the [tecnical details](#technicalDetails) or just kee
 ## Table of contents
 
 *  [Getting started](#gettingStarted)
+*  [Theaming Dedalus](#theamingDeadalus)
 *  [Setting Up](#settingUp)
 *  [Writing your story](#writingYourStory)
     *  [First things first](#firstThingsFirst)
@@ -45,6 +46,12 @@ You may want to read about the [tecnical details](#technicalDetails) or just kee
 Setting up a web page that runs Dedalus is very easy, but the simplest way is just to grab the skeleton story found in `src/html` and start customizing it to create your game. If you do so, you can just skip the Setting Up section and rely on the functioning default that's been prepared for you.
 
 Dedalus doesn't try to hide away from you HTML, CSS and Javascript, the technologies behind it, so, if you have any experience in creating web pages, you are ready to customize the appearance of the game you are creating to suit the mood of the story, and basic Javascipt skill can lead you to author stories with more complex logic; the unleashable possibilities are limitless.
+
+<a name="themingDedalus"></a>
+
+### Theming Dedalus
+
+Dedalus comes with ten themes, you can see them in the [theme showcase](http://pistacchio.github.com/Dedalus/themeshowcase/story.html). It cannot be stressed enough that they are in *no way* to be intended as "the ten themes of Dedalus", but quite the opposite. They want to show you want can be accomplished with a bit of CSS tweaking and inspire **you** to come up with something very unique for your own unique stories, dressing your novels with a fresh and surprising robe that helps setting the mood and fits the theme.
 
 <a name="settingUp"></a>
 

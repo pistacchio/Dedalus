@@ -1,0 +1,167 @@
+@font-face {
+  font-family: 'Orbitron';
+  font-style: normal;
+  font-weight: 500;
+  src: local('Orbitron-Medium'), url(http://themes.googleusercontent.com/static/fonts/orbitron/v3/VK2oK8L4CJesxwY5dF3zxbrIa-7acMAeDBVuclsi6Gc.woff) format('woff');
+}
+@font-face {
+  font-family: 'Orbitron';
+  font-style: normal;
+  font-weight: 900;
+  src: local('Orbitron-Black'), url(http://themes.googleusercontent.com/static/fonts/orbitron/v3/FyvTORElv6iWeP2Jf9yG3brIa-7acMAeDBVuclsi6Gc.woff) format('woff');
+}
+
+html,
+body {
+    font-family             : Arial, Helvetica, sans-serif;
+    font-size               : 16px;
+    color                   : #ccc;
+    background              : url(background.jpg) no-repeat center center fixed;
+    -webkit-background-size : cover;
+    -moz-background-size    : cover;
+    -o-background-size      : cover;
+    background-size         : cover;
+    margin                  : 0;
+    padding                 : 0;
+    height                  : 100%;
+    overflow                : hidden;
+}
+a {
+    text-decoration : none;
+    color           : #fff;
+    text-shadow     : 0 0 5px #12b6df;
+}
+p {
+    margin-top    : 10px;
+    margin-bottom : 10px;
+}
+
+#wrapper {
+    width               : 1000px;
+    margin-left         : auto;
+    margin-right        : auto;
+    padding-bottom      : 100px;
+    height              : 100%;
+    padding-top         : 30px;
+    background-image    : url(frame.png);
+    background-repeat   : no-repeat;
+    background-position : 65px 139px;
+}
+
+#story {
+    display: none;
+}
+
+#host {
+    width        : 500px;
+    margin-left  : auto;
+    margin-right : auto;
+    margin-top   : 120px;
+    height       : 400px;
+    overflow     : auto;
+    background   : rgba(4, 39, 48, 0.8);
+    padding      : 20px
+}
+
+#title {
+    position      : absolute;
+    top           : 0;
+    left          : 0;
+    border-bottom : 2px solid rgba(25, 162, 200, 0.5);
+    padding-left  : 40%;
+    padding-top   : 30px;
+    font-family   : 'Orbitron';
+    font-size     : 34px;
+    font-weight   : bold;
+    color         : #15ccfa;
+    text-shadow   : 0 0 10px #12b6df;
+    background    : rgba(5, 52, 64, 0.3);
+    width         : 100%;
+    text-align    : left;
+    height        : 60px;
+}
+
+#interactionHost {
+    position         : absolute;
+    overflow         : auto;
+    margin           : 0;
+    padding          : 5px;
+    padding-top      : 10px;
+    border : 1px solid #15ccfa;
+    -webkit-box-shadow:0 0 15px #ffffff;
+    -moz-box-shadow: 0 0 15px #ffffff;
+    box-shadow:0 0 15px #ffffff;
+    height           : 24px;
+    background-image : url(inventory-bg.png);
+}
+#interactionHost ul,
+#inventoryHost ul {
+    display : block;
+    margin  : 0;
+    padding : 0;
+}
+#interactionHost li,
+#inventoryHost li {
+    float           : left;
+    margin          : 0;
+    padding         : 0;
+    margin-right    : 10px;
+    list-style-type : none;
+}
+#inventoryHost li {
+    text-align : center;
+    width      : 130px;
+}
+
+#inventoryHost {
+    overflow: auto;
+}
+#inventoryHostWrapper {
+    width            : 130px;
+    top              : 150px;
+    margin-left      : 50%;
+    left             : -429px;
+    position         : absolute;
+    background-image : url(inventory-bg.png);
+    padding-bottom   : 20px;
+}
+#inventoryHostWrapper h2 {
+    font-family   : 'Orbitron';
+    text-shadow   : 0 0 5px #1ff05f;
+    color         : #1ff05f;
+    font-size     : 18px;
+    width         : 130px;
+    text-align    : center;
+    margin        : 0;
+    height        : 40px;
+    margin-top    : 10px;
+    margin-bottom : 10px;
+}
+
+#footer {
+    bottom      : 0px;
+    position    : absolute;
+    left        : 50%;
+    margin-left : -185px;
+    top         : 575px;
+    position    : absolute;
+    width       : 350px;
+    height      : 520px;
+    color       : #fff;
+    font-size   : 0;
+}
+#footer a {
+    font-size    : 15px;
+    margin-left  : 20px;
+    padding-left : 10px;
+    height       : 40px;
+    font-family  : 'Orbitron';
+    text-shadow  : 0 0 5px #1ff05f;
+}
+#undoHost {
+    padding-top : 20px;
+    margin-top  : 200px;
+}
+#resetHost {
+    height: 118px !important;
+}

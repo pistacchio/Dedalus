@@ -1,0 +1,123 @@
+@font-face {
+  font-family: 'Special Elite';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Special Elite'), local('SpecialElite-Regular'), url(http://themes.googleusercontent.com/static/fonts/specialelite/v3/9-wW4zu3WNoD5Fjka35Jm4kaQb-UsZVONjobs91YQtw.woff) format('woff');
+}
+
+html,
+body {
+    font-family         : "Special Elite", "Courier New", Courier, monospace;
+    font-size           : 16px;
+    color               : #000;
+    background-color    : #F8F8F8;
+    background-image    : url(coffee.png), url(background.jpg);
+    /* coffee stain thanks to http://kitamikeita.deviantart.com/art/10-Coffee-Stains-PNG-208843978 */
+    background-repeat   : no-repeat, repeat;
+    background-position : bottom right, center center;
+    margin              : 0;
+    padding             : 0;
+    height              : 100%;
+    overflow            : hidden;
+}
+a {
+    color           : #000;
+    text-decoration : none;
+    border-bottom   : 1px solid #aaa;
+}
+p {
+    margin-top    : 25px;
+    margin-bottom : 25px;
+}
+
+#wrapper {
+    width            : 1000px;
+    margin-left      : auto;
+    margin-right     : auto;
+    padding-bottom   : 100px;
+    height           : 100%;
+    padding-top      : 30px;
+}
+
+#story {
+    display: none;
+}
+
+#host {
+    width            : 800px;
+    margin-left      : auto;
+    margin-right     : auto;
+}
+
+#title {
+    font-size     : 24px;
+    font-weight   : bold;
+    color         : #000;
+    margin-bottom : 10px;
+    width         : 800px;
+    margin-left   : auto;
+    margin-right  : auto;
+    margin-bottom : 70px;
+    text-align    : left;
+    border-bottom : 2px solid black
+}
+
+#interactionHost {
+    position            : absolute;
+    overflow            : auto;
+    margin              : 0;
+    background-image: url(interaction.png);
+    padding             : 5px;
+    padding-top         : 15px;
+    border-bottom       : none;
+    height              : 34px;
+}
+#interactionHost ul,
+#inventoryHost ul {
+    display : block;
+    margin  : 0;
+    padding : 0;
+}
+#inventoryHost ul {
+    padding-top: 10px;
+}
+
+#interactionHost li,
+#inventoryHost li {
+    float           : left;
+    margin          : 0;
+    padding         : 0;
+    margin-right    : 10px;
+    list-style-type : none;
+}
+
+#inventoryHost {
+    overflow: auto;
+}
+#inventoryHostWrapper {
+    width       : 150px;
+    float       : right;
+    left        : 50%;
+    top         : 80px;
+    margin-left : 400px;
+    position    : absolute;
+}
+#inventoryHostWrapper h2 {
+    color          : #000;
+    font-size      : 18px;
+    width          : 150px;
+    text-align     : center;
+    margin         : 0;
+    padding-bottom : 10px;
+    border-bottom  : 2px solid black;
+}
+
+#footer {
+    bottom    : 10px;
+    font-size : 12px;
+    position  : fixed;
+    right     : 20px;
+}
+#undoStageHost {
+    display: none;
+}
