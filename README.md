@@ -57,6 +57,9 @@ Dedalus comes with ten themes, you can see them in the [theme showcase](http://p
 
 Mind that these themes (like Dedalus) require a recent version of a modern browser to work. In other words: no IE8, go for Chrome (Safari, or Firefox)!
 
+![Theme showcase](http://pistacchio.github.io/Dedalus/static/showcase.jpg)
+
+
 <a name="settingUp"></a>
 
 ## Setting Up
