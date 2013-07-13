@@ -14,8 +14,10 @@ You may want to read about the [tecnical details](#technicalDetails) or just kee
 ## Table of contents
 
 *  [Getting started](#gettingStarted)
-*  [Theaming Dedalus](#theamingDeadalus)
+    *  [Theaming Dedalus](#theamingDeadalus)
 *  [Setting Up](#settingUp)
+    *  [30 Seconds setup](thirtySecondsSetup)
+    *  [Setup for the not faint of heart](#realSetup)
 *  [Writing your story](#writingYourStory)
     *  [First things first](#firstThingsFirst)
     *  [Enters some Javascript](#entersSomeJavascript)
@@ -53,9 +55,27 @@ Dedalus doesn't try to hide away from you HTML, CSS and Javascript, the technolo
 
 Dedalus comes with ten themes, you can see them in the [theme showcase](http://pistacchio.github.com/Dedalus/themeshowcase/story.html). It cannot be stressed enough that they are in *no way* to be intended as "the ten themes of Dedalus", but quite the opposite. They want to show you want can be accomplished with a bit of CSS tweaking and inspire **you** to come up with something very unique for your own unique stories, dressing your novels with a fresh and surprising robe that helps setting the mood and fits the theme.
 
+Mind that these themes (like Dedalus) require a recent version of a modern browser to work. In other words: no IE8, go for Chrome (Safari, or Firefox)!
+
 <a name="settingUp"></a>
 
 ## Setting Up
+
+<a name="thirtySecondsSetup"></a>
+
+### 30 Seconds setup
+
+1. Download the starter pack of [Dedalus](http://pistacchio.github.com/Dedalus/downloads/Dedalus.zip) or [Dedalus Dedlee](http://pistacchio.github.com/Dedalus/downloads/Dedalus-dedlee.zip) and unzip it
+1. Write your extraordinary story in the `<div id="story">` tag (or  `<div id="dedleeSource">` if you use Dedlee) of `story.html`
+1. Upload everything to your site or zip it back and distribute it
+1. Receive compliments
+1. Celebrate with a glass of mango juice!
+
+If you want, you can now skip the next section and jump to [Writing your story](#writingYourStory)
+
+<a name="realSetup"></a>
+
+### Setup for the not faint of heart
 
 Your HTML5 page must include, in order:
 
