@@ -72,6 +72,21 @@
             "Turn Page"
                 {{ story.turnTo('fourthPage'); }}
 
+        o.thirdObject
+            "Empty"
+                Empty
+
+            "Use with..."
+                with.fourthObject
+                    Interaction with fourth object
+                with.firstCharacter
+                    Interaction with first character
+
+                Default value
+
+        o.fourthObject
+
+
         p.intro
             Intro text
 
@@ -124,6 +139,15 @@
             Fourth Page
             Back to [[thirdPage]]third page[[]]
             Talk to a {[firstCharacter.characterId]}character{[]}
+
+            {[thirdObject]}third object{[]}
+
+            ((sixthParagraph))sixth paragraph(())
+
+            {[fourthObject]}fourth object{[]}
+
+            pg.sixthParagraph
+                Text that is not going to be shown
 
         pg.thirdParagraph
             Third paragraph

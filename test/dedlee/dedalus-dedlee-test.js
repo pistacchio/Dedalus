@@ -54,6 +54,8 @@ test('Objects', function () {
     equal($('#target #firstObject action#Get when').length, 1);
     equal(mergeText($('#target #firstObject action#Get when')), "!story.isInInventory('firstObject')");
     equal($('#target #firstObject').attr('inventoryName'), 'First object');
+    equal($('#secondObject action[id= "Use with..."] with').length, 1);
+    equal($('#secondObject action[id= "Use with..."] with').length, 1);
 });
 
 test('Characters', function () {

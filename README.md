@@ -26,6 +26,7 @@ You may want to read about the [tecnical details](#technicalDetails) or just kee
     *  [Template engine](#templateEngine)
     *  [Objects](#objects)
         *  [Characters](#characters)
+        *  [Combination actions (use with...)](#combinationActions)
     *  [Inventory](#inventory)
     *  [Optional actions](#optionalActions)
     *  [Before and after actions](#beforeAndAfterActions)
@@ -68,8 +69,8 @@ Mind that these themes (like Dedalus) require a recent version of a modern brows
 
 ### 30 Seconds setup
 
-1. Download the starter pack of [Dedalus](http://pistacchio.github.com/Dedalus/downloads/Dedalus.zip) or [Dedalus Dedlee](http://pistacchio.github.com/Dedalus/downloads/Dedalus-dedlee.zip) and unzip it
-1. Write your extraordinary story in the `<div id="story">` tag (or  `<div id="dedleeSource">` if you use Dedlee) of `story.html`
+1. Download the starter pack of [Dedalus](http://pistacchio.github.com/Dedalus/downloads/Dedalus.zip) and unzip it
+1. Write your extraordinary story in the `<div id="story">` tag of `story.html` (or `<div id="dedleeSource">` in `story-dedlee.html` if you use Dedlee)
 1. Upload everything to your site or zip it back and distribute it
 1. Receive compliments
 1. Celebrate with a glass of mango juice!
@@ -286,6 +287,39 @@ Everything we said and we'll say on objects stands true for `characters`. Defini
     </action>
 </character>
 ```
+
+<a name="combinationActions"></a>
+
+#### Combination actions (use with...)
+
+Some actions require to specify an argument, think of "talk about", "use with" and the like. They are called *combination actions* in Dedalus and rely on defining `<with>` tags. When you click on a combination action, the interaction menu populates with all the possible candidates for the action to be executed upon. This the list of all objects available in the inventory and on the current text (without the object triggering the action, of course!).
+
+Captain Mastushima finally found the "Key of the  Neutronmancer", a legendary artifact of an ancient civilization. He can try *using* it on various doors and objects.
+
+```xml
+<obj id="neutronmancerKey" inventoryName="Key of the Neutronmancer">
+    <action id="Examine">
+        Seems like a normal 21st century schizoid key.
+    </action>
+    <action id="Use with">
+        <with id="morrisonDoor">
+            You hear a distant voice chanting: "This is the end, my only friend, the end...". But nothing happens.
+        </with>
+        <with id="blueDoor">
+            The door unlocks silently.
+        </with>
+
+        You try, and try again, but without any appreciable result.
+    </action>
+</obj>
+
+<page id="doorRoom">
+    You are in a room poorly described. You can see three doors: a <interact with="morrisonDoor">Morrison Door</interact>,
+    a <interact with="blueDoor">blue door</interact> and a <interact with="redDoor">red door</interact>
+</page>
+```
+
+Selecting the "Use with" action makes "Morrison Door", "blue door", "red door" and any item eventually in the inventory a possible candidate as object for the "Use with" action. Clicking on "Morrison door" prints "You hear a distant voice...", selecting the blue door yields "The door unlocks silently" and clicking on any other object prints the default text "You try, and try again...".
 
 <a name="inventory"></a>
 

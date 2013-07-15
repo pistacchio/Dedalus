@@ -1,5 +1,5 @@
 /**
- * dedalus.js v0.9.3.1
+ * dedalus.js v0.9.4
  * 2013, Gustavo Di Pietro
  * Licensed under the GPL license (http://www.gnu.org/licenses/gpl-2.0.html)
 **/
@@ -80,25 +80,26 @@ var Dedalus,
      */
     Dedalus.prototype.parseStory = function () {
         var _story = {
-                currentPage               : '',
-                title                     : '',
-                inventory                 : [],
-                pages                     : {},
-                paragraphs                : {},
-                objects                   : {},
-                initialization            : '',
-                intro                     : '',
-                numParagraphsShown        : 0,
-                numPagesTurned            : 0,
-                numParagraphsShownInPage  : 0,
-                numTotalActions           : 0,
-                numActionsPerformedInPage : 0,
-                beforeEveryThing          : function () {},
-                beforeEveryPageTurn       : function () {},
-                beforeEveryParagraphShown : function () {},
-                afterEveryThing           : function () {},
-                afterEveryPageTurn        : function () {},
-                afterEveryParagraphShown  : function () {}
+                currentPage                 : '',
+                title                       : '',
+                inventory                   : [],
+                pages                       : {},
+                paragraphs                  : {},
+                objects                     : {},
+                initialization              : '',
+                intro                       : '',
+                numParagraphsShown          : 0,
+                numPagesTurned              : 0,
+                numParagraphsShownInPage    : 0,
+                numTotalActions             : 0,
+                numActionsPerformedInPage   : 0,
+                combinationActionInProgress : false,
+                beforeEveryThing            : function () {},
+                beforeEveryPageTurn         : function () {},
+                beforeEveryParagraphShown   : function () {},
+                afterEveryThing             : function () {},
+                afterEveryPageTurn          : function () {},
+                afterEveryParagraphShown    : function () {}
             },
             temporaryDomSourceCopy;
 
@@ -143,9 +144,13 @@ var Dedalus,
          *                      'Object Name': {
          *                          actions:          {
          *                                                'Action Name': {
-         *                                                    when:    Function (returning a bool) determining whether
-         *                                                             the action must be presented in a given context
-         *                                                    content: String to be printed when the action is executed
+         *                                                    when:        Function (returning a bool) determining whether
+         *                                                                 the action must be presented in a given context
+         *                                                    content:     doT template to be printed when the action is executed
+         *                                                    with:    {   "with" combinations
+         *                                                        'Object to combine with': doT template to be printed when the action is executed
+         *                                                    },
+         *                                                    hasWith:     Boolean: true if "with" has any value
          *                                                }
          *                                            }
          *                          inventoryName:    Name to be used to present
@@ -191,9 +196,11 @@ var Dedalus,
 
                 // object actions
                 obj.find('action').each(function () {
-                    var whenCheck    = function () { return true; },
-                        action       = $(this),
-                        when         = action.find('when').text() || undefined;
+                    var whenCheck        = function () { return true; },
+                        action           = $(this),
+                        when             = action.find('when').text() || undefined,
+                        withCombinations = {},
+                        hasCombinations  = false;
 
                     if (when !== undefined) {
                         whenCheck = function () { return eval(when); };
@@ -201,9 +208,23 @@ var Dedalus,
 
                     action.find('when').remove();
 
+                    // combination actions ("with" interactions)
+                    action.find('with').each(function () {
+                        var withElement  = $(this),
+                            withPartner  = withElement.attr('id'),
+                            withContent  = doT.template(Dedalus.getRawContent(withElement));
+
+                        withCombinations[withPartner] = withContent;
+                        hasCombinations               = true;
+
+                        withElement.remove();
+                    });
+
                     objects[id].actions[action.attr('id')] = {
-                        when             : whenCheck,
-                        content          : doT.template(Dedalus.getRawContent(action))
+                        'when'    : whenCheck,
+                        'content' : doT.template(Dedalus.getRawContent(action)),
+                        'hasWith' : hasCombinations,
+                        'with'    : withCombinations
                     };
                 });
 
@@ -491,6 +512,29 @@ var Dedalus,
         var maybeParagraph = this.getCurrentPage().paragraphs[id];
 
         return maybeParagraph !== undefined ? maybeParagraph : this._story.paragraphs[id];
+    };
+
+    /**
+     * Keep track of an ongoind combination action
+     */
+    Dedalus.prototype.activateCombinationAction = function () {
+        this._story.combinationActionInProgress = true;
+    };
+
+    /**
+     * Stop keeping track of an ongoind combination action
+     */
+    Dedalus.prototype.disactivateCombinationAction = function () {
+        this._story.combinationActionInProgress = false;
+    };
+
+    /**
+     * Whether a combination action is awaiting for a target
+     * @return {Boolean} true if there is a combination action awaiting
+     *                        for a target
+     */
+    Dedalus.prototype.isCombinationAction = function () {
+        return this._story.combinationActionInProgress;
     };
 
     /**

@@ -192,37 +192,11 @@
 					<key>name</key>
 					<string>entity.name.function</string>
 				</dict>
-				<key>3</key>
-				<dict>
-					<key>name</key>
-					<string>variable.parameter.function</string>
-				</dict>
 			</dict>
 			<key>comment</key>
-			<string>Page (first</string>
+			<string>Page, paragraph, with parameters, initscript and before/after actions</string>
 			<key>match</key>
-			<string>\b(p\.)(.*)(\s+\(first\))</string>
-			<key>name</key>
-			<string>meta.function.dedlee</string>
-		</dict>
-		<dict>
-			<key>captures</key>
-			<dict>
-				<key>1</key>
-				<dict>
-					<key>name</key>
-					<string>storage.type.function</string>
-				</dict>
-				<key>2</key>
-				<dict>
-					<key>name</key>
-					<string>entity.name.function</string>
-				</dict>
-			</dict>
-			<key>comment</key>
-			<string>Page, paragraph, initscript and before/after actions</string>
-			<key>match</key>
-			<string>\b(p\.|pg\.)(.*)</string>
+			<string>\b(p\.|pg\.|with\.)(.*)</string>
 			<key>name</key>
 			<string>meta.function.dedlee</string>
 		</dict>

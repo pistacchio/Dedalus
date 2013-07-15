@@ -142,6 +142,27 @@ test('Characters', function () {
     ok(contain($('#host'), 'Bla Bla'));
 });
 
+test('Combination actions', function () {
+    $('a:contains("third object")').click();
+    $('a:contains("Use with...")').click();
+    equal(mergeText($('#interactionHost')), 'Firstobjectcharacterfourthobject');
+    ok(notContain($('#host'), 'Interaction with fourth object'));
+    $('#interactionHost a:contains("fourth object")').click();
+    ok(contain($('#host'), 'Interaction with fourth object'));
+
+    ok(notContain($('#host'), 'Interaction with first character'));
+    $('a:contains("third object")').click();
+    $('a:contains("Use with...")').click();
+    $('#interactionHost a:contains("character")').click();
+    ok(contain($('#host'), 'Interaction with first character'));
+
+    ok(notContain($('#host'), 'Default value'));
+    $('a:contains("third object")').click();
+    $('a:contains("Use with...")').click();
+    $('#interactionHost a:contains("First object")').click();
+    ok(contain($('#host'), 'Default value'));
+});
+
 test('Id in links', function () {
     equal($('#host a:contains("character")').attr('data-id'), 'characterId');
 });

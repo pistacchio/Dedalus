@@ -111,27 +111,10 @@
             },
             "2": {
                 "name": "entity.name.function",
-            },
-            "3":
-            {
-                "name": "variable.parameter.function"
             }
         },
-        "comment": "Page (first",
-        "match": "\\b(p\\.)(.*)(\\s+\\(first\\))",
-        "name": "meta.function.dedlee"
-    },
-    {
-        "captures": {
-            "1": {
-                "name": "storage.type.function"
-            },
-            "2": {
-                "name": "entity.name.function",
-            }
-        },
-        "comment": "Page, paragraph, initscript and before/after actions",
-        "match": "\\b(p\\.|pg\\.)(.*)",
+        "comment": "Page, paragraph, with parameters, initscript and before/after actions",
+        "match": "\\b(p\\.|pg\\.|with\\.)(.*)",
         "name": "meta.function.dedlee"
     },
     {

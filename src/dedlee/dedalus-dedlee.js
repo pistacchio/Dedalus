@@ -1,5 +1,5 @@
 /**
- * dedalus-dadlee.js v0.7.3
+ * dedalus-dadlee.js v0.9.0
  * 2013, Gustavo Di Pietro
  * Licensed under the GPL license (http://www.gnu.org/licenses/gpl-2.0.html)
 **/
@@ -13,7 +13,6 @@ Dedalus.prototype.parseDedlee = function (inputSource, target) {
     "use strict";
     /*jslint evil: true, white: true, nomen: true */
     /*global $, Dedalus*/
-
 
     var i,
         lineCounter,
@@ -110,6 +109,19 @@ Dedalus.prototype.parseDedlee = function (inputSource, target) {
                     singleLine : true,
                     openTag    : function () { return '<when>' + line.ltrim().replace(/^when /, '') + '</when>'; },
                     closeTag   : null
+                },
+                // Combination actions. Turn with.OBJECT_ID in <with id="object">
+                {
+                    type       : 'with',
+                    check      : function (currentRule) { return currentRule === 'action' && line.ltrim().startsWith('with'); },
+                    singleLine : false,
+                    openTag    : function () {
+                        var split    = line.trim().split('.'),
+                            objectId = split[1];
+
+                        return '<with id="' + objectId + '">';
+                    },
+                    closeTag   : function () { return "</with>"; }
                 },
                 // Pages. Turn p.PAGE_ID in <page id="PAGE_ID">
                 {

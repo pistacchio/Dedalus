@@ -87,7 +87,27 @@
             </action>
         </obj>
 
-        <!-- Pages -->
+        <obj id="thirdObject">
+            <action id="Empty">
+                Empty
+            </action>
+
+            <action id="Use with...">
+                <with id="fourthObject">
+                    Interaction with fourth object
+                </with>
+                <with id="firstCharacter">
+                    Interaction with first character
+                </with>
+
+                Default value
+            </action>
+        </obj>
+
+        <obj id="fourthObject">
+        </obj>
+
+       <!-- Pages -->
         <page id="intro">
             Intro text
         </page>
@@ -150,6 +170,17 @@
             Fourth Page
             Back to <turn to="thirdPage">third page</turn>
             Talk to a <interact with="firstCharacter" id="characterId">character</interact>
+
+            <interact with="thirdObject">third object</interact>
+
+            <show paragraph="sixthParagraph">sixth paragraph</show>
+
+            <interact with="fourthObject">fourth object</interact>
+
+            <paragraph id="sixthParagraph">
+                Text that is not going to be shown
+            </paragraph>
+
         </page>
 
         <paragraph id="thirdParagraph">
