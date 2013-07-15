@@ -4,7 +4,7 @@ Dedalus is an authoring system for generating *Choose Your Own Adventure* (CYOA)
 
 Games created with Dedalus can run in the browser, so they are very easy to deliver to potential players.
 
-A sample game can be played [here](http://pistacchio.github.com/Dedalus/cloak.html). It is an implementation of [Cloak of Darkess](http://www.firthworks.com/roger/cloak/), a very simple story meant just to showcase how different authoring systems implement the same game. Mind that the original Cloak of Darkess is thought for *Interactive Fiction* (IF), while Dedalus generates CYOAs, a different, but related, kind of interactive narrative.
+A sample game can be played [here](http://pistacchio.github.com/Dedalus/cloak.html). It is an implementation of [Cloak of Darkess](http://pistacchio.github.io/Dedalus/cloak/cloak.html), a very simple story meant just to showcase how different authoring systems implement the same game. Mind that the original Cloak of Darkess is thought for *Interactive Fiction* (IF), while Dedalus generates CYOAs, a different, but related, kind of interactive narrative.
 You can read the source code of Cloak of Darkess in the example directory.
 
 You may want to read about the [tecnical details](#technicalDetails) or just keep reading the tutorial and start creating amazing adventures!
