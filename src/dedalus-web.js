@@ -1,5 +1,5 @@
 /**
- * dedalus-web.js v0.9.5
+ * dedalus-web.js v0.9.6
  * 2013, Gustavo Di Pietro
  * Licensed under the GPL license (http://www.gnu.org/licenses/gpl-2.0.html)
 **/
