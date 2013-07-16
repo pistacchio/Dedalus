@@ -57,6 +57,7 @@ var DedalusWeb;
         this.undoStageTarget   = options.undoStageTarget;
         this.domTargetParent   = options.domTargetParent;
         this.onPrint           = options.onPrint ? options.onPrint.bind(this) : this.onPrint;
+        this.onInventoryUpdate = options.onInventoryUpdate ? options.onInventoryUpdate.bind(this) : this.onInventoryUpdate;
 
         // Set the utility buttons functionality
         this.undoTarget.on('click', this.undo.bind(this));
@@ -251,7 +252,8 @@ var DedalusWeb;
     DedalusWeb.prototype.updateInventory = function () {
         var i, link, object, inventoryName,
             self  = this,
-            items = this.getInventory();
+            items = this.getInventory(),
+            links = [];
 
         this.inventoryTarget.html('<ul></ul>');
 
@@ -276,10 +278,18 @@ var DedalusWeb;
 
             link.on('click', makeOnClick(items[i]));
 
-            // Create the <a> within a <li> within the target <ul>
-            this.inventoryTarget.find('ul').append(link);
-            this.inventoryTarget.find('ul>a').wrap('<li>');
+            links.push(link);
         }
+
+        // Call optional custom bevavior
+        links = this.onInventoryUpdate(links);
+
+        for (i = 0; i < links.length; i += 1) {
+            // Create the <a> within a <li> within the target <ul>
+            this.inventoryTarget.find('ul').append(links);
+        }
+
+        this.inventoryTarget.find('ul>a').wrap('<li>');
     };
 
     DedalusWeb.prototype.executePrinting = function (content, turnPage) {
@@ -381,8 +391,28 @@ var DedalusWeb;
         this.inventoryTarget.find('a').off('click').contents().unwrap();
     };
 
+    /**
+     * Called before printing anything. Made to be extended, can be used to
+     * customize the printing behavior.
+     * @param  {doT template} content The content about to be printed
+     * @param  {Boolean}      turn    Whether the printing triggers a page turn
+     *                                or the text is just appended to the current
+     *                                content
+     * @return {Boolean}              If true, execute the normal printing, else
+     *                                let the custom behavior handle the displaye
+     *                                of the new content
+     */
     DedalusWeb.prototype.onPrint = function (content, turn) {
         return true;
+    };
+
+    /**
+     * Function to customize the items to be added to the inventory
+     * @param  {Array<jQuery>} items A list of jQuery items to be added to the inventory
+     * @return {Array<jQuery>}       like @param items, eventually manipulated
+     */
+    DedalusWeb.prototype.onInventoryUpdate = function (items) {
+        return items;
     };
 
 }());

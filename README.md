@@ -653,6 +653,40 @@ and set the `onPrint` option
 
 ```
 
+In a similar way, you may want to customize the inventory. Just hook the `onInventoryUpdate` function to the initialization of DedalusWeb:
+
+``` javascript
+    $(function () {
+        new DedalusWeb({
+            onInventoryUpdate : function (items) { /* },
+            [..]
+
+```
+
+`onInventoryUpdate` is passed the list of *jQuery* links about to be added to the inventory container. The default behavior is to just pass it back, but you might want to customize the output, for example sorting the items in a certain order, replacing the text with images or everything. Note that the items have already attached the proper `onClick` event, so you should limit yourself to extend them without replacing them, unless you want some special action to be triggered when clicked.
+
+Here is an example function that makes the "Vintage blaster" item to appear with color purple instead of the default one (yeah, this can be achived with just CSS, but you know, examples :-) !)
+
+``` javascript
+    $(function () {
+        new DedalusWeb({
+            onInventoryUpdate : function (items) {
+                var i, item,
+                    newItems = [];
+                for (i = 0; i < items.length; i += 1) {
+                    item = items[i];
+                    if (item.text() === 'Vintage Blaster') {
+                        item.css('color', '#800080');
+                    }
+                    newItems.push(item);
+                }
+                return newItems;
+            },
+            [..]
+
+```
+
+
 <a name="utilityFunctionsRecapAndGoodLuck"></a>
 
 ### Utility functions recap and good luck
