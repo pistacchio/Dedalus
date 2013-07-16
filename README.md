@@ -846,6 +846,12 @@ The following table, also useful as a brief cheatsheet for Dedalus, compares the
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Taken<br>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ story.putInInventory('firstObject'); }}<br>
             &nbsp;&nbsp;&nbsp;&nbsp;&lt;/action&gt;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&lt;action id="Combine with..."&gt;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;with id="otherObject"&gt;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Perfectly combined!<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/with&gt;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Default text<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&lt;/action&gt;<br>
             &lt;/object&gt;
         </td>
         <td style="vertical-align: top">
@@ -856,6 +862,10 @@ The following table, also useful as a brief cheatsheet for Dedalus, compares the
             &nbsp;&nbsp;&nbsp;&nbsp;"Take"<br>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Taken<br>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ story.putInInventory('firstObject'); }}<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;"Combine with..."<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;with.otherObject<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Perfectly combined!<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Default text
         </td>
     </tr>
     <tr>
