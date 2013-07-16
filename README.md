@@ -658,7 +658,7 @@ In a similar way, you may want to customize the inventory. Just hook the `onInve
 ``` javascript
     $(function () {
         new DedalusWeb({
-            onInventoryUpdate : function (items) { /* },
+            onInventoryUpdate : function (items) { /* */ },
             [..]
 
 ```
