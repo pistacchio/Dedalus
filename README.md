@@ -14,7 +14,7 @@ You may want to read about the [tecnical details](#technicalDetails) or just kee
 ## Table of contents
 
 *  [Getting started](#gettingStarted)
-    *  [Theaming Dedalus](#theamingDeadalus)
+    *  [Theming Dedalus](#theamingDeadalus)
 *  [Setting Up](#settingUp)
     *  [30 Seconds setup](thirtySecondsSetup)
     *  [Setup for the not faint of heart](#realSetup)
@@ -121,7 +121,7 @@ The DedalusWeb constructor needs the following options to be set, each of which 
 | domTarget         | this is the element where the output of the story will be shown. Everytime you present a new piece of the story to the user, it will be displayed here.                                                                                                                |
 | titleTarget       | this, unsurprisingly, contains the title of the story                                                                                                                                                                                                                  |
 | inventoryTarget   | if your story needs an inventory (like in most IF games), define an element that is always visible to the user. If you don't need it, just pass a hidden div                                                                                                           |
-| interactionTarget | as you should have seen the example (The Cloak of Darkness), whenever you click on an active object (also in the inventory), a floating popup is show featuring all the actions that the player can perform with the object. This is a div with position:absolute set. |
+| interactionTarget | as you should have seen in the example (The Cloak of Darkness), whenever you click on an active object (also in the inventory), a floating popup is shown featuring all the actions that the player can perform with the object. This is a div with position:absolute set. |
 | undoTarget        | an element that, when clicked, undoes the last action                                                                                                                                                                                                                  |
 | saveTarget        | an element that, when clicked, saves the current story state                                                                                                                                                                                                           |
 | restoreTarget     | an element that, when clicked, restores the story to the last saved point                                                                                                                                                                                              |
@@ -133,7 +133,7 @@ The DedalusWeb constructor needs the following options to be set, each of which 
 
 ## Writing your story
 
-You write Dedalus stories withing a hidden `div` with custom tags and optionally some Javascript. You should start from the empty story found in `html/story` to make sure that all the needed tags are in place, even when empty and unused.
+You write Dedalus stories within a hidden `div` with custom tags and optionally some Javascript. You should start from the empty story found in `html/story` to make sure that all the needed tags are in place, even when empty and unused.
 
 <a name="firstThingsFirst"></a>
 
@@ -141,7 +141,7 @@ You write Dedalus stories withing a hidden `div` with custom tags and optionally
 
 To start off, you want you story to have a title, an introduction and a first page to print.
 
-A note before proceding: unlike other similar tools, Dedalus tries to be very story oriented, as opposed to world oriented. You are not going to generate the simulation of a virtual world with various locations to explore, but you're writing pages and paragraphs. Of course, you can map every page to a room (like in classic IFs and like shown in the sample game and, for simplicity, in this tutorial), but this is only a possibility.
+A note before proceeding: unlike other similar tools, Dedalus tries to be very story oriented, as opposed to world oriented. You are not going to generate the simulation of a virtual world with various locations to explore, but you're writing pages and paragraphs. Of course, you can map every page to a room (like in classic IFs and like shown in the sample game and, for simplicity, in this tutorial), but this is only a possibility.
 
 ``` xml
 <div id="story">
@@ -215,7 +215,7 @@ It's time to add some action.
 </page>
 
 <paragraph id="notGoodIdea">
-    Hmm... It doesn't seem like a very good idea to do... Well, you whatever you wanted to do!
+    Hmm... It doesn't seem like a very good idea to do... Well, you do whatever you want to do!
 </paragraph>
 ```
 
@@ -240,13 +240,13 @@ The true power of Dedalus relies on the possibilities offered by the template en
 
 The curly syntax is that of our template engine. The question mark and double question marks define a *if-then-else* block. Here we are using our custom fuction to check if the captain is a maniac (for example he killed 12 aliens), and if so print *"You already killed too many people! Remember? 12 of those poor souls!"*, else print *"You'd better leave it off, or the Doctor might get angry."*.
 
-An *if* block is one of the most useful construc you can use, but you'd better teach yourself the whole sytax of doT.js. It is really simple and can help you write amazing stories. Here we are also using `{{= }}` that prints a variable and simply executing Javascript code with `{{}}` (we change the value of the variable `story.triedToTakeTheScrewDriver`).
+An *if* block is one of the most useful construct you can use, but you'd better teach yourself the whole sytax of doT.js. It is really simple and can help you write amazing stories. Here we are also using `{{= }}` that prints a variable and simply executing Javascript code with `{{}}` (we change the value of the variable `story.triedToTakeTheScrewDriver`).
 
 <a name="objects"></a>
 
 ### Objects
 
-A curious person like you cannot stand a story where he can't touch things! Objects come to the rescue. We can "almost" interact with the scredriver and the laser gun, but let's make the interaction with the blaster even more interesting.
+A curious person like you cannot stand a story where he can't touch things! Objects come to the rescue. We can "almost" interact with the screwdriver and the laser gun, but let's make the interaction with the blaster even more interesting.
 
 ``` xml
 <page id="weaponRoom">
@@ -263,7 +263,7 @@ A curious person like you cannot stand a story where he can't touch things! Obje
 
 <obj id="vintageBlaster">
     <action id="Examine">
-        It seems in good conditions, considering the age.
+        It seems in good condition, considering the age.
     </action>
     <action id="Lick">
         There's nothing better than the taste of titanium steel!
@@ -271,7 +271,7 @@ A curious person like you cannot stand a story where he can't touch things! Obje
 </obj>
 ```
 
-At this point, it should be pretty clear what is going on here. `Blasters` is now clickable, it prints a new paragraph making the player aware of the presence of two blasters. One of them is clickable, and clicking on it shows a popup with two possible actions that the player can perform on it, *Examine* and *Lick*. Clicking on any of them prints another text in response to the action. You can use doT.js templating in the actions, as well, to provide dynamic content, set variables and so on. Just like paragraphs, if an object is only available in a page, you can define it within the page itself.
+At this point, it should be pretty clear what is going on here. `Blasters` is now clickable, it prints a new paragraph making the player aware of the presence of two blasters. One of them is clickable, and clicking on it shows a popup with two possible actions that the player can perform on it, *Examine* and *Lick*. Clicking on either of them prints another text in response to the action. You can use doT.js templating in the actions, as well, to provide dynamic content, set variables and so on. Just like paragraphs, if an object is only available in a page, you can define it within the page itself.
 
 <a name="characters"></a>
 
