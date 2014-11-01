@@ -7,7 +7,7 @@ Games created with Dedalus can run in the browser, so they are very easy to deli
 A sample game can be played [here](http://pistacchio.github.com/Dedalus/cloak/cloak.html). It is an implementation of [Cloak of Darkess](http://www.firthworks.com/roger/cloak/), a very simple story meant just to showcase how different authoring systems implement the same game. Mind that the original Cloak of Darkess is thought for *Interactive Fiction* (IF), while Dedalus generates CYOAs, a different, but related, kind of interactive narrative.
 You can read the source code of Cloak of Darkess in the example directory.
 
-You may want to read about the [tecnical details](#technicalDetails) or just keep reading the tutorial and start creating amazing adventures!
+You may want to read about the [technical details](#technicalDetails) or just keep reading the tutorial and start creating amazing adventures!
 
 **Note:** The tutorial illustrates how to write Dedalus stories in the most "canonical" way, but there an alternative syntax for writig Dedalus narrative called [Dedlee](#dedlee). It doesn't make use of HTML-like syntax, and you might prefer it. However, you should really follow the tutorial closely, it is short, easy and fun, and *then* have a look at Dedlee and decide what system you prefer.
 
