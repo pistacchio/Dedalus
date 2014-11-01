@@ -377,15 +377,15 @@ Sometimes you can perform some actions on an object, and sometimes you can't. Fo
 </obj>
 ```
 
-`<when>` must be any valid Javascript code than, when executed, returns true or false and the action is only available if the return value us true.
+`<when>` must be any valid Javascript code than, when executed, returns true or false and the action is only available if the return value is true.
 
 <a name="beforeAndAfterActions"></a>
 
 ### Before and after actions
 
-If you looked at the source code of the example story, you might have noticed *before*something and *after*something tags lying around. After/Before actions are a flexible tool to provide dynamism outside the bounding scopes of pages and paragraphs.
+If you looked at the source code of the example story, you might have noticed *before* something and *after* something tags lying around. After/Before actions are a flexible tool to provide dynamism outside the bounding scopes of pages and paragraphs.
 
-Matsushima's sworn enemy Lord Evilord has hit our hero's spaceship with a photon rocket and, to add color to our story, every once in a while the on-board computer repeats worrisome alerts. We could implement this by calling an action (within `{{}}`) everytime the hero enters any room of the intergalactic vessel (read: everytime the player "turns a page"), but this would become boring very soon. Let's write our more cleaver solution by extending initscript and adding some code in `<afterEveryPageTurn>`:
+Matsushima's sworn enemy Lord Evilord has hit our hero's spaceship with a photon rocket and, to add color to our story, every once in a while the on-board computer repeats worrisome alerts. We could implement this by calling an action (within `{{}}`) everytime the hero enters any room of the intergalactic vessel (read: everytime the player "turns a page"), but this would become tiresome for the writer very soon. Let's write our more clever solution by extending initscript and adding some code in `<afterEveryPageTurn>`:
 
 ``` xml
 <initscript>
