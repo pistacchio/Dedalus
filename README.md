@@ -215,7 +215,7 @@ It's time to add some action.
 </page>
 
 <paragraph id="notGoodIdea">
-    Hmm... It doesn't seem like a very good idea to do... Well, you whatever you wanted to do!
+    Hmm... It doesn't seem like a very good idea to do... Well, whatever you wanted to do!
 </paragraph>
 ```
 
@@ -240,7 +240,7 @@ The true power of Dedalus relies on the possibilities offered by the template en
 
 The curly syntax is that of our template engine. The question mark and double question marks define a *if-then-else* block. Here we are using our custom fuction to check if the captain is a maniac (for example he killed 12 aliens), and if so print *"You already killed too many people! Remember? 12 of those poor souls!"*, else print *"You'd better leave it off, or the Doctor might get angry."*.
 
-An *if* block is one of the most useful construc you can use, but you'd better teach yourself the whole sytax of doT.js. It is really simple and can help you write amazing stories. Here we are also using `{{= }}` that prints a variable and simply executing Javascript code with `{{}}` (we change the value of the variable `story.triedToTakeTheScrewDriver`).
+An *if* block is one of the most useful construct you can use, but you'd better teach yourself the whole syntax of doT.js. It is really simple and can help you write amazing stories. Here we are also using `{{= }}` that prints a variable and simply executing Javascript code with `{{}}` (we change the value of the variable `story.triedToTakeTheScrewDriver`).
 
 <a name="objects"></a>
 
