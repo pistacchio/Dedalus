@@ -246,7 +246,7 @@ An *if* block is one of the most useful construc you can use, but you'd better t
 
 ### Objects
 
-A curious person like you cannot stand a story where he can't touch things! Objects come to the rescue. We can "almost" interact with the scredriver and the laser gun, but let's make the interaction with the blaster even more interesting.
+A curious person like you cannot stand a story where he can't touch things! Objects come to the rescue. We can "almost" interact with the screwdriver and the laser gun, but let's make the interaction with the blaster even more interesting.
 
 ``` xml
 <page id="weaponRoom">
@@ -292,7 +292,7 @@ Everything we said and we'll say on objects stands true for `characters`. Defini
 
 #### Combination actions (use with...)
 
-Some actions require to specify an argument, think of "talk about", "use with" and the like. They are called *combination actions* in Dedalus and rely on defining `<with>` tags. When you click on a combination action, the interaction menu populates with all the possible candidates for the action to be executed upon. This the list of all objects available in the inventory and on the current text (without the object triggering the action, of course!).
+Some actions require to specify an argument, think of "talk about", "use with" and the like. They are called *combination actions* in Dedalus and rely on defining `<with>` tags. When you click on a combination action, the interaction menu populates with all the possible candidates for the action to be executed upon. This means all objects available in the inventory and on the current text (without the object triggering the action, of course!).
 
 Captain Mastushima finally found the "Key of the  Neutronmancer", a legendary artifact of an ancient civilization. He can try *using* it on various doors and objects.
 
