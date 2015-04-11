@@ -1,3 +1,5 @@
+# Starswirl
+
 Starswirl is a game engine for creating *Choose Your Own Adventure* (CYOA) games. It is similar to other creation tools like [Twine](http://www.gimcrackd.com/etc/src/), [Undum](http://undum.com/) or [Varytale](http://varytale.com/books/). It is based upon the [Dedalus](https://github.com/pistacchio/Dedalus) engine
 
 Games created with Starswirl can run in the browser, so they are very easy to deliver to potential players. However Starswirl can also be ran nativly on desktops and mobiles using proejcts like [NW.js](http://nwjs.io/) and [PhoneGap](http://phonegap.com/)
