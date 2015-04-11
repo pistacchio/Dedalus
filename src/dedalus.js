@@ -554,10 +554,9 @@ var Dedalus,
     Dedalus.prototype.removeFromInventory = function (object) {
         var i;
 
-        for (i = 0; i < this._story.inventory.length; i += 1) {
-            if (this._story.inventory[i] === object) {
-                this._story.inventory = this._story.inventory.splice(i, i);
-            }
+        var index = this._story.inventory.indexOf(object);
+        if (index > -1) {
+            this._story.inventory.splice(index, 1);
         }
 
         this.messageCenter.publish('inventory', 'inventoryChanged');
