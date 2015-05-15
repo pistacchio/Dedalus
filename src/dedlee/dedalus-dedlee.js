@@ -164,19 +164,19 @@ Dedalus.prototype.parseDedlee = function (inputSource, target) {
                 // [[PAGE_ID]]link to page[[]] => <turn to="PAGE_ID">link to page</turn>
                 {
                     applyTo    : 'page, paragraph, action',
-                    replaceRgx : /\[\[(.*)\]\](.*)\[\[\]\]/g,
+                    replaceRgx : /\[\[(.*?)\]\](.*?)\[\[\]\]/g,
                     withRgx    : '<turn to="$1">$2</turn>'
                 },
                 // {{OBJECT_ID}}link to object{{}} => <interact with="OBJECT_ID">link to object</interact>
                 {
                     applyTo    : 'page, paragraph, action',
-                    replaceRgx : /\{\[(.*)\]\}(.*)\{\[\]\}/g,
+                    replaceRgx : /\{\[(.*?)\]\}(.*?)\{\[\]\}/g,
                     withRgx    : '<interact with="$1">$2</interact>'
                 },
                 // (PARAGRAPH_ID))link to paragraph() => <show paragraph="PARAGRAPH_ID">link to paragraph</show>
                 {
                     applyTo    : 'page, paragraph, action',
-                    replaceRgx : /\(\((.*)\)\)(.*)\(\(\)\)/g,
+                    replaceRgx : /\(\((.*?)\)\)(.*?)\(\(\)\)/g,
                     withRgx    : '<show paragraph="$1">$2</show>'
                 }
             ];
