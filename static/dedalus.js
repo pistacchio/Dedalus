@@ -164,7 +164,7 @@ var Dedalus,
         function getObjects (parent) {
             var objects = {};
 
-            parent.find('obj, character').each(function () {
+            parent.find('>obj, >character').each(function () {
                 var obj           = $(this),
                     id            = obj.attr('id'),
                     inventoryName = obj.attr('inventoryName');
