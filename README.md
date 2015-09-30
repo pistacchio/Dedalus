@@ -618,7 +618,7 @@ function makeWeapons () {
 
 As already stressed multiple times, having control on the HTML structure and CSS of your story allows you to tailor how the novel looks like and you can strenghten the communicative power of your text dressing it with an appropriate robe.
 
-Another point of customization (maybe for more advanced users) is the abilty to change how the text appears. If you've tried the sample story Cloak of Darkness or already made some experimentation with Dedalus by yourself, you may have noticed how a "page turn" clears the current page and fills it with the new content. In case of a paragraph, it just gets appends to the current text being shown.
+Another point of customization (maybe for more advanced users) is the ability to change how the text appears. If you've tried the sample story Cloak of Darkness or already made some experimentation with Dedalus by yourself, you may have noticed how a "page turn" clears the current page and fills it with the new content. In case of a paragraph, it just gets appends to the current text being shown.
 
 You might want to change this default behavior to make it prettier or more appropriate for your story.
 
