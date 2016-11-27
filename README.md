@@ -694,6 +694,7 @@ Here is an example function that makes the "Vintage blaster" item to appear with
 Here is a recap of all the functions that you can use in writing your games:
 
 * `story.currentPageIs()`
+* `story.getCurrentPageId()`
 * `story.removeFromInventory()`
 * `story.putInInventory()`
 * `story.isInInventory()`
@@ -708,7 +709,7 @@ Here is a recap of all the functions that you can use in writing your games:
 * `story.disable()`
 * `story.endGame()`
 
-The only one we didn't encounter in our tutorial is `story.currentPageIs()`, but its usage is as useful as banal: `story.currentPageIs(<ID_OF_A_PAGE>)` and returns true or false based on the page currently being visualized.
+The only ones we haven't encountered in our tutorial are `story.currentPageIs()` and `story.getCurrentPageId()`, but their usage is as useful as banal: `story.currentPageIs(<ID_OF_A_PAGE>)` and returns true or false based on the page currently being visualized, while `story.getCurrentPageId()` returns the ID of the current page.
 
 This is it. Dedalus is a powerful tool to express your creativity and with it open integration with HTML, CSS and Javascript, the possibilities to customize and extend it to suit the needs of your sories are endless.
 
