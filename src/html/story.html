@@ -55,24 +55,13 @@
 
         <!-- Pages -->
         <page id="intro">
-            You are about to experience the most amazing empty story ever...
+            The year is 2074, and the battle of WWIII is raging on strong. The Axis powers contain Germany, Italy, and France. The Allied powers contain America, Britian, and Spain. 
         </page>
 
-        <page id="dummyPage" class="first">
-            You are in an empty page except for a <show paragraph="dummyParagraph">paragraph</show>.
-
-            <p>Quite unsurprisingly, there is even an <interact with="dummyObject">object</interact> lying around.</p>
-
-            <p>Looking around with more attention, you notice <turn to="otherPage">another page</turn></p>
-
-            <paragraph id="dummyParagraph">
-                Seiously, What did you expect?
-            </paragraph>
-        </page>
-
-        <page id="otherPage">
-            Plot twist! The story ends abruptly.
-            {{ story.endGame(); }}
+        <page id="choosingPage" class="first">
+    It is up to you to decide which team you want to win. If you join the <turn to="AxisStart"> Axis Powers </turn> then you take the position of a german paratrooper, storming the Eastern coast of the US. 
+    If you decide to join the <turn to="AlliedStart"> Allied Powers </turn> then you take the position of a US army cadet, holding a garrisoned position in a fort located on the Eastern coast.
+            
         </page>
 
     </div>
