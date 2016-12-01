@@ -1,0 +1,71 @@
+html, body
+{
+    height: 100%;
+    min-height: 100%;
+    margin: 0;
+    padding: 0;
+}
+body{
+background: grey;
+}
+.metoothanks{
+background: linear-gradient(135deg, red, blue);
+    height: 100%;
+    min-height: 100%;
+    position: relative }
+button{
+background: linear-gradient(135deg, red, blue);
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%) }
+
+.bottomtrickbb {
+  position: absolute;
+  bottom: 0;
+  left: .5;
+  font-size: 7px;
+}
+    
+/* .hidden {
+    height: 100%;
+    min-height: 100%;
+    position: relative }
+} */
+
+.info{
+  background: linear-gradient(135deg, #00ff00, #fff);
+  height: 100%;
+  min-height: 100%;
+  position: relative;
+}
+
+
+.mainbody{
+background: linear-gradient(135deg, red, blue);
+    height: 100%;
+    min-height: 100%;
+    position: relative }
+.first, .second, .third, .fourth, .fifth, .sixth{
+    text-align: center;
+    font-size: 35px;
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%) }
+    
+.final{
+    height: 100%;
+    min-height: 100%;
+    text-align: center;
+    font-size: 35px;
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%) }
