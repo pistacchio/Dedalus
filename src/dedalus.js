@@ -368,6 +368,7 @@ var Dedalus,
     Dedalus.prototype.generateEmptyStory = function () {
         return {
             currentPageIs                : this.currentPageIs.bind(this),
+            getCurrentPageId             : this.getCurrentPageId.bind(this),
             removeFromInventory          : this.removeFromInventory.bind(this),
             putInInventory               : this.putInInventory.bind(this),
             isInInventory                : this.isInInventory.bind(this),
