@@ -5,7 +5,7 @@
 **/
 
 /**
- * DedalusWeb is an implementatio on Dedalus (that DedalusWeb depens on) that
+ * DedalusWeb is an implementation on Dedalus (that DedalusWeb depends on) that
  * runs a Dedalus story in a browser
  */
 
@@ -88,7 +88,7 @@ var DedalusWeb;
     DedalusWeb.prototype = new Dedalus();
 
     /**
-     * Convert all the meningful tags (<turn to>, <interact with>, <show paragraph>)
+     * Convert all the meaningful tags (<turn to>, <interact with>, <show paragraph>)
      * withing domTarget into action links
      */
     DedalusWeb.prototype.handleInteractions = function () {
@@ -99,7 +99,7 @@ var DedalusWeb;
          * argument attrib
          * @param  {String}   element Element to convert into <a>
          * @param  {String}   attrib  Attribute to pass to fn
-         * @param  {String}   type    object|parapgraph|page added as class to the newly
+         * @param  {String}   type    object|paragraph|page added as class to the newly
          *                            created link
          * @param  {Function} fn      Function to be executed when the newly created
          *                            link is clicked
@@ -126,7 +126,7 @@ var DedalusWeb;
                 elem.after(link);
                 elem.remove();
 
-                // Actually disable a pre-desabled link (has class="disabled"). Must have an id
+                // Actually disable a pre-disabled link (has class="disabled"). Must have an id
                 if (isDisabled) {
                     self.disable(originalId);
                 }
@@ -180,7 +180,7 @@ var DedalusWeb;
                 // If the action is of type "use this in combination with something else"
                 // set the current combination action and populate interactionTarget
                 // with possible candidates (all the objects visible in domTarget and
-                // those in the inventory, exluding the object calling the combination
+                // those in the inventory, excluding the object calling the combination
                 // action), else execute the action
                 if (action.hasWith) {
                     self.activateCombinationAction();
@@ -281,7 +281,7 @@ var DedalusWeb;
             links.push(link);
         }
 
-        // Call optional custom bevavior
+        // Call optional custom behavior
         links = this.onInventoryUpdate(links);
 
         for (i = 0; i < links.length; i += 1) {
@@ -354,7 +354,7 @@ var DedalusWeb;
     };
 
     DedalusWeb.prototype.disable = function (id) {
-        // Subsitute the matched <a> with a <span> remembering the click function
+        // Substitute the matched <a> with a <span> remembering the click function
         var element = this.domTarget.find('a[data-id="' + id + '"]'),
             elementDom,
             spanElement,
@@ -375,7 +375,7 @@ var DedalusWeb;
     };
 
     DedalusWeb.prototype.enable = function (id) {
-        // Subsitute the matched <span> with a <a> restoring the click function
+        // Substitute the matched <span> with a <a> restoring the click function
         var element         = this.domTarget.find('span[data-id="' + id + '"]'),
             aElement        = '<a href="#" data-id="' + id + '">' + element.text() + '</a>',
             originalClickFn = element.data('originalClickFn');
@@ -399,7 +399,7 @@ var DedalusWeb;
      *                                or the text is just appended to the current
      *                                content
      * @return {Boolean}              If true, execute the normal printing, else
-     *                                let the custom behavior handle the displaye
+     *                                let the custom behavior handle the display
      *                                of the new content
      */
     DedalusWeb.prototype.onPrint = function (content, turn) {
