@@ -555,23 +555,17 @@ var Dedalus,
     Dedalus.prototype.removeFromInventory = function (object) {
         var i;
 
-        //console.log("Removing " + object + "from inventory. Start: [" + this._story.inventory + "], length: " + this._story.inventory.length);
-
         for (i = 0; i < this._story.inventory.length; i ++) {
-            //console.log("Checking index " + i + " for object " + object);
             if (this._story.inventory[i] === object) {
                 if (i == 0) {
-                    //console.log("Shifted " + object + " at " + i);
                     this._story.inventory.shift();
                 } else {
-                    //console.log("Spliced one " + object + " at " + (i-1));
-                    this._story.inventory = this._story.inventory.splice(i-1, 1); /*was originally splice(i,i)*/
+                    this._story.inventory = this._story.inventory.splice(i-1, 1);
                     i--;
                 }
             }
         }
 
-        //console.warn("Post-Remove: " + this._story.inventory + ", length: " + this._story.inventory.length);
         this.messageCenter.publish('inventory', 'inventoryChanged');
     };
 
@@ -581,12 +575,8 @@ var Dedalus,
      * @param  {String} object Id of the object to add
      */
     Dedalus.prototype.putInInventory = function (object) {
-        //console.log("Removing " + object + " from inventory before adding");
         this.removeFromInventory(object);
-        //console.log("Adding " + object + " to inventory. Before: [" + this._story.inventory + "]");
         this._story.inventory.push(object);
-        //console.info("Updated inventory: [" + this._story.inventory + "]");
-
         this.messageCenter.publish('inventory', 'inventoryChanged');
     };
 
