@@ -11,7 +11,7 @@
  * Its constructor loads source story and defines a global "story" variable
  * that can be openly accessed at runtime by the story script.
 
- * Dedalus depens on:
+ * Dedalus depends on:
  *     jQuery: http://jquery.com/
  *     doT.js: http://olado.github.io/doT/index.html
  */
@@ -38,7 +38,7 @@ var Dedalus,
      *                                                element containing the story
      *                                                source
      *                                  dedleeSource: If this jQuery element is set,
-     *                                                assume that the story is in dadlee
+     *                                                assume that the story is in dedlee
      *                                                format and hosted in this element
      *                              }
      * @return                      A Dedalus instance
@@ -117,7 +117,7 @@ var Dedalus,
          * running
          * @param  {jQuery} parent Element containing <initscript>
          * @return {String}        Javascript source code to be executed in the
-         *                         story initialization fase
+         *                         story initialization phase
          */
         function getInitScript (parent) {
             return parent.find('initscript').text();
@@ -267,9 +267,9 @@ var Dedalus,
          *                      'Page Name': {
          *                          content:    a doT template for later execution
          *                          objects:    a dictionary of objects (see above)
-         *                                      only accesible from within the page
+         *                                      only accessible from within the page
          *                          paragraphs: a dictionary of paragraphs (see above)
-         *                                      only accesible from within the page
+         *                                      only accessible from within the page
          *                          isFirst:    true if this is the first page to be
          *                                      shown at startup after displaying the
          *                                      intro (<class="first">)
@@ -334,7 +334,7 @@ var Dedalus,
             _story.afterEveryParagraphShown  = parent.find('afterEveryParagraphShown').text();
         }
 
-        // If the story is in dadlee format, first convert it into the normal
+        // If the story is in dedlee format, first convert it into the normal
         // HTML-like format
         if (this.dedleeSource) {
             this.parseDedlee(this.dedleeSource, this.domSource);
@@ -392,7 +392,7 @@ var Dedalus,
      * @param  {Bool}   turnPage True if the printing must generate a change of page
      */
     Dedalus.prototype.print = function (content, turnPage) {
-        // Saves the current application state before changin it in order to gather
+        // Saves the current application state before changing it in order to gather
         // data for the undo
         this.storyUndo      = jQuery.extend(true, {}, story);
         this._storyUndo     = jQuery.extend(true, {}, this._story);
@@ -411,7 +411,7 @@ var Dedalus,
     /**
      * Display a page.
      * @param  {String} target Id of the page to present
-     * @param  {Bool}   noTurn Whether the page must generate a page turn. Defauls
+     * @param  {Bool}   noTurn Whether the page must generate a page turn. Defaults
      *                         to true
      */
     Dedalus.prototype.turnTo = function (target, noTurn) {
@@ -516,14 +516,14 @@ var Dedalus,
     };
 
     /**
-     * Keep track of an ongoind combination action
+     * Keep track of an ongoing combination action
      */
     Dedalus.prototype.activateCombinationAction = function () {
         this._story.combinationActionInProgress = true;
     };
 
     /**
-     * Stop keeping track of an ongoind combination action
+     * Stop keeping track of an ongoing combination action
      */
     Dedalus.prototype.disactivateCombinationAction = function () {
         this._story.combinationActionInProgress = false;
@@ -548,16 +548,21 @@ var Dedalus,
     };
 
     /**
-     * Remove an item from the inventory and trigger a "modified invetory" event
+     * Remove an item from the inventory and trigger a "modified inventory" event
      * on the message center
      * @param  {String} object Id of the object to remove
      */
     Dedalus.prototype.removeFromInventory = function (object) {
         var i;
 
-        for (i = 0; i < this._story.inventory.length; i += 1) {
+        for (i = 0; i < this._story.inventory.length; i ++) {
             if (this._story.inventory[i] === object) {
-                this._story.inventory = this._story.inventory.splice(i, i);
+                if (i == 0) {
+                    this._story.inventory.shift();
+                } else {
+                    this._story.inventory = this._story.inventory.splice(i-1, 1);
+                    i--;
+                }
             }
         }
 
@@ -565,20 +570,19 @@ var Dedalus,
     };
 
     /**
-     * Add an item to the inventory and trigger a "modified invetory" event
+     * Add an item to the inventory and trigger a "modified inventory" event
      * on the message center
      * @param  {String} object Id of the object to add
      */
     Dedalus.prototype.putInInventory = function (object) {
         this.removeFromInventory(object);
         this._story.inventory.push(object);
-
         this.messageCenter.publish('inventory', 'inventoryChanged');
     };
 
     /**
-     * Check if an object is currenlty in the inventory
-     * @param  {String} object Id of teh object to check the presence of
+     * Check if an object is currently in the inventory
+     * @param  {String} object Id of the object to check the presence of
      * @return {Bool}          Whether the object is in the inventory
      */
     Dedalus.prototype.isInInventory = function (object) {
@@ -601,7 +605,7 @@ var Dedalus,
     };
 
     /**
-     * Return the stry title
+     * Return the story title
      * @return {String} Story title
      */
     Dedalus.prototype.getTitle = function () {
@@ -714,7 +718,7 @@ var Dedalus,
     /**
      * Restore the application to the last saved position. The concrete implementation
      * is delegated to executeRestore(). Execute the restore of if there is any
-     * save available. The check of save avaibility is implementation specific.
+     * save available. The check of save availability is implementation specific.
      */
     Dedalus.prototype.restore = function () {
         var savedData   = this.getRestoreData(),
@@ -826,7 +830,7 @@ var Dedalus,
     /**
      * Return restored data
      * @return {Array} An array whose first element is the restored from save
-     *                 Dedauls story object, and the second is Dedalus _story:
+     *                 Dedalus story object, and the second is Dedalus _story:
      *                 [story, _story]
      */
     Dedalus.prototype.getRestoreData = function () {};
@@ -874,7 +878,7 @@ var Dedalus,
         return out;
     };
 
-    /* ** UTILTY FUNCTIONS ** */
+    /* ** UTILITY FUNCTIONS ** */
 
 
     /**
