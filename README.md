@@ -4,7 +4,7 @@ Dedalus is an authoring system for generating *Choose Your Own Adventure* (CYOA)
 
 Games created with Dedalus can run in the browser, so they are very easy to deliver to potential players.
 
-A sample game can be played [here](http://pistacchio.github.com/Dedalus/cloak/cloak.html). It is an implementation of [Cloak of Darkess](http://www.firthworks.com/roger/cloak/), a very simple story meant just to showcase how different authoring systems implement the same game. Mind that the original Cloak of Darkess is thought for *Interactive Fiction* (IF), while Dedalus generates CYOAs, a different, but related, kind of interactive narrative.
+A sample game can be played [here](http://pistacchio.github.io/Dedalus/cloak/cloak.html). It is an implementation of [Cloak of Darkess](http://www.firthworks.com/roger/cloak/), a very simple story meant just to showcase how different authoring systems implement the same game. Mind that the original Cloak of Darkess is thought for *Interactive Fiction* (IF), while Dedalus generates CYOAs, a different, but related, kind of interactive narrative.
 You can read the source code of Cloak of Darkess in the example directory.
 
 You may want to read about the [tecnical details](#technicalDetails) or just keep reading the tutorial and start creating amazing adventures!
@@ -54,7 +54,7 @@ Dedalus doesn't try to hide away from you HTML, CSS and Javascript, the technolo
 
 ### Theming Dedalus
 
-Dedalus comes with ten themes, you can see them in the [theme showcase](http://pistacchio.github.com/Dedalus/themeshowcase/story.html). It cannot be stressed enough that they are in *no way* to be intended as "the ten themes of Dedalus", but quite the opposite. They want to show you want can be accomplished with a bit of CSS tweaking and inspire **you** to come up with something very unique for your own unique stories, dressing your novels with a fresh and surprising robe that helps setting the mood and fits the theme.
+Dedalus comes with ten themes, you can see them in the [theme showcase](http://pistacchio.github.io/Dedalus/themeshowcase/story.html). It cannot be stressed enough that they are in *no way* to be intended as "the ten themes of Dedalus", but quite the opposite. They want to show you want can be accomplished with a bit of CSS tweaking and inspire **you** to come up with something very unique for your own unique stories, dressing your novels with a fresh and surprising robe that helps setting the mood and fits the theme.
 
 Mind that these themes (like Dedalus) require a recent version of a modern browser to work. In other words: no IE8, go for Chrome (Safari, or Firefox)!
 
@@ -69,7 +69,7 @@ Mind that these themes (like Dedalus) require a recent version of a modern brows
 
 ### 30 Seconds setup
 
-1. Download the starter pack of [Dedalus](http://pistacchio.github.com/Dedalus/downloads/Dedalus.zip) and unzip it
+1. Download the starter pack of [Dedalus](http://pistacchio.github.io/Dedalus/downloads/Dedalus.zip) and unzip it
 1. Write your extraordinary story in the `<div id="story">` tag of `story.html` (or `<div id="dedleeSource">` in `story-dedlee.html` if you use Dedlee)
 1. Upload everything to your site or zip it back and distribute it
 1. Receive compliments
