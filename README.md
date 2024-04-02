@@ -967,5 +967,3 @@ If your main editor is [Sublime Text 2](http://www.sublimetext.com/), you want t
 ## Contacts
 
 Feel free to contact me at *pistacchio* at *gmail* dot *com*
-
-Gustavo Di Pietro
